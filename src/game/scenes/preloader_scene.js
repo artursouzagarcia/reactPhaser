@@ -6,6 +6,7 @@ import seta_direita from '../assets/seta_direita.png';
 import predio_campus1 from '../assets/predio_campus1.png';
 import predio_campus2 from '../assets/predio_campus2.png';
 import sacodemoedas from '../assets/Sacodemoedas.png';
+import diamante from '../assets/diamante.png';
 import Duvida from '../assets/Duvida.png';
 import dude from '../assets/dude.png';
 import avatar_sprite from '../assets/avatar_sprite.png';
@@ -14,6 +15,7 @@ import button_start_click from '../assets/button_start_click.png';
 import tooltipBG from '../assets/tooltipBG.png';
 import professor_carloslopes from '../assets/professor_carloslopes.png';
 import placa_duvidas from '../assets/placa_duvidas.png';
+import diploma from '../assets/Diploma.png';
 
 import bandeiraD1 from '../assets/seta_direita1.png';
 import bandeiraD2 from '../assets/seta_direita2.png';
@@ -59,6 +61,7 @@ import bandeiraE20 from '../assets/seta_esquerda20.png';
 import cadeadoNew from '../assets/Cadeado.png';
 import cadeadoSprite from '../assets/cadeadoSprite.png';
 import white from '../assets/white.png';
+import red from '../assets/red.png';
 
 export default class PreloaderScene extends Phaser.Scene {
     constructor() {
@@ -140,6 +143,7 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('tiles', tileset_ground_campus);
         this.load.image('tilesElements', tileset_elements_campus);
         this.load.image('white', white);
+        this.load.image('red', red);
 
         //CARREGA JSON DO TILEMAP EXPORTADO NO TILED
         this.load.tilemapTiledJSON('map', camposJson);
@@ -147,7 +151,9 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('imgPredio_campus1', predio_campus1);
         this.load.image('imgPredio_campus2', predio_campus2);
         this.load.image('sacodemoedas', sacodemoedas);
+        this.load.image('diamante', diamante);
         this.load.image('duvidas', Duvida);
+        this.load.image('diploma', diploma);
 
         //CARREGA UM SPRITE (DUDE.PNG) QUE TEM A SEQ PARA ANIMAÇÃO
         this.load.spritesheet('dude', dude, {

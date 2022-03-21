@@ -7,7 +7,7 @@ import VideoPlayer from '../videoPlayer/VideoPlayer';
 
 const _alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
 
-function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objAulaSelecionada }) {
+function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objAulaSelecionada, storeCasoClinico }) {
     const [aula, setAula] = useState({ ...objAulaSelecionada });
     const [vendoGabarito, setVendoGabarito] = useState(false);
     const [indexPerguntaVendo, setIndexPerguntaVendo] = useState(0);
@@ -43,7 +43,9 @@ function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objA
         >
             <div className="contentPopUp">
                 <div className="TitlePopUp">
-                    <span id="TitlePopUp">{`Exercícios da ${objAulaSelecionada.ordem}ª FASE`}</span>
+                    <span id="TitlePopUp">
+                        {storeCasoClinico ? 'Caso Clínico' : `Exercícios da ${objAulaSelecionada.ordem}ª FASE`}
+                    </span>
                 </div>
                 <div
                     className="close"

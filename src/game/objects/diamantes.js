@@ -1,34 +1,44 @@
 import Phaser from 'phaser';
 const COLOR_PRIMARY = 0x007bff;
 
-export default class SacoMoedas extends Phaser.GameObjects.Image {
-    constructor(scene, x, y, playerSetPostion, player, bandeira) {
-        super(scene, x, y, 'sacodemoedas');
+export default class Diamantes extends Phaser.GameObjects.Image {
+    constructor(scene, x, y, player, bandeira) {
+        super(scene, x, y, 'diamante');
 
         this.player = player;
-        this.playerSetPostion = playerSetPostion;
         this.scene.add.existing(this);
         this.interactveAula = this.setInteractive();
         // this.collectcoinsaudioFX = this.scene.sound.add('coinsbag', { loop: false });
-        this._initClickOn();
+        this._init();
         this.scene.physics.world.enableBody(this, 0);
         this.bandeira = bandeira;
+        this.isCollideable = false;
     }
 
-    _initClickOn() {
-        this.interactveAula.on('pointerup', () => {
-            //CLICANDO NO OBJETO MANDO ELE PARA LÁ NAS COORDANADAS ESPECIFICAS
-            //A BIBLIOTECA STAR CALCULA O TRAJETO EM TILES, POR ISSO AS COORDENADAS SÃO DIVIDAS PELO TILESIZE
-            const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
-            this.scene.findPathAndMove(PlayerX, PlayerY, this.playerSetPostion.x / 32, this.playerSetPostion.y / 32);
-        });
+    _init() {
+        // this.interactveAula.on('pointerup', () => {
+        //     //CLICANDO NO OBJETO MANDO ELE PARA LÁ NAS COORDANADAS ESPECIFICAS
+        //     //A BIBLIOTECA STAR CALCULA O TRAJETO EM TILES, POR ISSO AS COORDENADAS SÃO DIVIDAS PELO TILESIZE
+        //     const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
+        //     this.scene.findPathAndMove(PlayerX, PlayerY, this.playerSetPostion.x / 32, this.playerSetPostion.y / 32);
+        // });
 
-        this.scene.physics.add.overlap(this.player, this, this._collectCoins.bind(this));
+        this.scale = 0.9;
+
         // this.scene.sound.add('coinsbag', { loop: false });
+    }
+
+    setColoder() {
+        if (!this.isCollideable) {
+            this.visible = true;
+            this.isCollideable = true;
+            this.scene.physics.add.overlap(this.player, this, this._collectCoins.bind(this));
+        }
     }
 
     _collectCoins(player, sacodemoedas) {
         // contabiliza a moeda
+        console.log('pegou diamanteeeee');
         this.scene.rexUI.add
             .toast({
                 x: this.scene.camera.worldView.x + this.scene.camera.worldView.width / 2,
@@ -44,9 +54,9 @@ export default class SacoMoedas extends Phaser.GameObjects.Image {
                     bottom: 20,
                 },
             })
-            .showMessage('Olha um saco de moedas!');
-        this.bandeira.pegaMoeda();
-        player.ganhaMoeda();
+            .showMessage('Olha um dimante!');
+        this.bandeira.pegaDiamante();
+        player.ganhaDiamantes();
         //TOCA O EFEITO SONORO
         // this.collectcoinsaudioFX.play();
         //SOME COM O "CORPO"

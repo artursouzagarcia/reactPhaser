@@ -30,6 +30,7 @@ export default class GameScene extends Phaser.Scene {
         this.scoreTextMoedas = null;
         this.scoreTextDiamantes = null;
         this.duvidaImage = null;
+        this.emitter = null;
     }
 
     preload() {
@@ -56,6 +57,14 @@ export default class GameScene extends Phaser.Scene {
         this.player = new Player(this, 45 + 50, 1060 + 200, 'avatarSprit');
         this.player.scale = 0.8;
         this.player.setDepth(15);
+        this.particles = this.add.particles('white');
+        this.particles.setDepth(5);
+        this.emitter = this.particles.createEmitter({
+            speed: 80,
+            scale: { start: 0.07, end: 0 },
+            blendMode: 'ADD',
+        });
+
         //criando bandeira de aulas
         for (let index = aulasMOKE.length - 1; index >= 0; index--) {
             const { positions, playerPostion, Title, sacoMoedas, ...resto } = aulasMOKE[index];
@@ -72,6 +81,7 @@ export default class GameScene extends Phaser.Scene {
                     sacoMoedas,
                     resto,
                     this.Bandeiras[this.Bandeiras.length - 1],
+                    this.emitter,
                 );
 
                 this.Bandeiras.push(bandeira);
@@ -86,6 +96,8 @@ export default class GameScene extends Phaser.Scene {
                     Title,
                     sacoMoedas,
                     resto,
+                    false,
+                    this.emitter,
                 );
                 this.Bandeiras.push(bandeira);
             }
@@ -96,8 +108,6 @@ export default class GameScene extends Phaser.Scene {
         this.map.currentLayerIndex = 0;
 
         const Predio_campus1 = this.add.image(305 + 160, 720 + 220, 'imgPredio_campus1');
-        const Predio_campus2 = this.add.image(1530 + 170, 480 + 230, 'imgPredio_campus2');
-        const Predio_campus3 = this.add.image(850 + 170, 480 + 230, 'imgPredio_campus2');
         const Predio_campus4 = this.add.image(400 + 160, 200 + 220, 'imgPredio_campus1');
         const Predio_campus5 = this.add.image(815 + 160, 60 + 300, 'imgPredio_campus1');
 
@@ -127,6 +137,7 @@ export default class GameScene extends Phaser.Scene {
         const PlacaProfessor = this.add.image(1810 + 210, 1050 + 220, 'placa_duvidas');
         professor.scale = 0.8;
         PlacaProfessor.scale = 0.8;
+
         // Place the player above the tile layers
         // this.player.setDepth(10);
         // Place the overhead layer above everything else

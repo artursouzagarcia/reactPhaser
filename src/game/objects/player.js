@@ -10,6 +10,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.lastpositionX = this.x;
         this.lastpositionY = this.y;
         this.qtdMoedas = 0;
+        this.qtdDiamantes = 0;
         this.timeline = null;
         this.createAnimationSet();
     }
@@ -127,6 +128,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     ganhaMoeda() {
         this.qtdMoedas++;
+
+        const elementValorMoedas = document.getElementById('ValorMoedas');
+        if (elementValorMoedas) elementValorMoedas.innerText = this.qtdMoedas;
+
+        console.log('O player agora tem ' + this.qtdMoedas + ' moedas.');
+    }
+
+    ganhaDiamantes() {
+        this.qtdDiamantes++;
 
         const elementValorMoedas = document.getElementById('ValorMoedas');
         if (elementValorMoedas) elementValorMoedas.innerText = this.qtdMoedas;

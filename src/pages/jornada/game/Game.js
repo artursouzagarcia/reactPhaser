@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Game from '../../../game/index';
 import ScorePlayer from '../../../store/scorePlayer';
 import storeJornada from '../../../store/StoreJornada';
+import storeCasoClinico from '../../../store/StoreCasoClinico';
 import storeToast from '../../../store/StoreToast';
 import storeTooltip from '../../../store/StoreTooltip';
 import { ContainerArrowBack } from './stylesGame';
@@ -18,6 +19,7 @@ import elemento_menu from '../../../game/assets/elemento_menu.png';
 import ToastGame from '../../../components/toastGame/ToastGame';
 
 import aulasMOKE from '../../../store/mokeAula';
+import PopUpPerguntasFase from '../../../components/popUps/PopUpPerguntasFase';
 
 export default observer(() => {
     const navegate = useNavigate();
@@ -30,6 +32,12 @@ export default observer(() => {
 
         return objJornada.find((jornada) => jornada.VideoId == storeJornada.idAulaSelecionada);
     }, [storeJornada.idAulaSelecionada]);
+
+    const casoClinicoSelecionado = useMemo(() => {
+        if (!objJornada.length || !storeCasoClinico.idAulaSelecionada) return null;
+
+        return objJornada.find((jornada) => jornada.VideoId == storeCasoClinico.idAulaSelecionada);
+    }, [storeCasoClinico.idAulaSelecionada]);
 
     useEffect(() => {
         if (!game) {
@@ -96,6 +104,15 @@ export default observer(() => {
                 </div>
             </div>
             {jornadaSelecionada && storeJornada.popUpVideoAulaAberto && <PopUpVideo objAulaSelecionada={jornadaSelecionada} />}
+
+            {casoClinicoSelecionado && storeCasoClinico.popUpVideoAulaAberto && (
+                <PopUpPerguntasFase
+                    objAulaSelecionada={casoClinicoSelecionado}
+                    popUpAulaPerguntasIsOpen={storeCasoClinico.popUpVideoAulaAberto}
+                    closePopUpAulaFase={() => storeCasoClinico.fechaPopupVideo()}
+                    casoClinico={true}
+                />
+            )}
             {storeTooltip.aberto && (
                 <div
                     style={{
