@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-
+import { autorun } from 'mobx'
+import Timer from '../store/teste';
 export default class HelloWorldScene extends Phaser.Scene {
   constructor() {
     super('helloworld')
@@ -17,20 +18,29 @@ export default class HelloWorldScene extends Phaser.Scene {
   }
 
   createEmitter() {
-    const particles = this.add.particles('red')
-
-    const emitter = particles.createEmitter({
-      speed: 100,
-      scale: { start: 1, end: 0 },
-      blendMode: 'ADD',
+    let Texto = this.add.text(0, 0, 'Score: 0', {
+      fontSize: '18px',
     })
 
-    const logo = this.physics.add.image(400, 100, 'logo')
+    autorun(() => {
+      
+      console.log("caiu auto run")
+      Texto.setText("Score: " + Timer.secondsPassed)
+    })
+    // const particles = this.add.particles('red')
 
-    logo.setVelocity(100, 200)
-    logo.setBounce(1, 1)
-    logo.setCollideWorldBounds(true)
+    // const emitter = particles.createEmitter({
+    //   speed: 100,
+    //   scale: { start: 1, end: 0 },
+    //   blendMode: 'ADD',
+    // })
 
-    emitter.startFollow(logo)
+    // const logo = this.physics.add.image(400, 100, 'logo')
+
+    // logo.setVelocity(100, 200)
+    // logo.setBounce(1, 1)
+    // logo.setCollideWorldBounds(true)
+
+    // emitter.startFollow(logo)
   }
 }

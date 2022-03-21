@@ -21,12 +21,32 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <base href="/">
     <title>React App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <div id="phaser-container"></div>
+    <div id="score" style="display: none">
+			<div class="containerMenu" >
+				<div class="containerAvatar">
+					<img class="avatar" src="https://apoio.medx.med.br/game1/src/assets/Sticker.png" />
+				</div>
+				<div class="containerMenuScore">
+					<div class="containerScore" title="Quantidade de moedas que voce possui.">
+						<img class="iconeScore" src="https://apoio.medx.med.br/game1/src/assets/Moeda.gif" />
+						<!-- <span class="labelScores">Diamantes:</span> -->
+						<span class="valueScore" id="ValorMoedas">0</span>
+					</div>
+					<div class="containerScore"  title="Quantidade de diamantes que voce possui.">
+						<img class="iconeScore" src="https://apoio.medx.med.br/game1/src/assets/Diamante.gif" />
+						<!-- <span class="labelScores">Moedas:</span> -->
+						<span class="valueScore" id="ValorDiamantes">0</span>
+					</div>
+				</div>
+			</div>
+		</div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -1,0 +1,68 @@
+<style>
+    .containerMenu{
+        display: flex;
+        margin-top: 100px;
+        margin-left: 20px;
+    }
+    .containerAvatar{
+        margin-right: 20px;
+    }
+    .containerMenuScore{
+        display: flex;
+        flex-direction: column;
+        width: 70px;
+        height: 100px;
+        justify-content: space-around;
+    }
+
+    .containerScore{
+        display: flex;
+        align-items: center;
+        background-color: bisque;
+        padding: 5px 10px;
+        padding-left: 0px;
+        border-radius: 8px;
+        /* margin-bottom: 20px; */
+        position: relative;
+        background: url('../madeira.jpg');
+        /* border: 1px solid red; */
+    }
+
+    .iconeScore{
+        width: 80px;
+        left: -30px;
+        position: absolute;
+    }
+
+    .labelScores{
+        margin-left: 60px;
+    }
+
+    .valueScore{
+        margin-left: 40px;
+        color:#fff;
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    }
+    .avatar{
+        height: 100px;
+    }
+</style>
+<div class="containerMenu">
+    <div class="containerAvatar">
+        <img class="avatar" src="../Sticker.png" />
+    </div>
+    <div class="containerMenuScore">
+        <div class="containerScore">
+            <img class="iconeScore" src="../Moeda.gif" />
+            <!-- <span class="labelScores">Diamantes:</span> -->
+            <span class="valueScore" id="ValorMoedas">0</span>
+        </div>
+        <div class="containerScore">
+            <img class="iconeScore" src="../Diamante.gif" />
+            <!-- <span class="labelScores">Moedas:</span> -->
+            <span class="valueScore" id="ValorDiamantes">0</span>
+        </div>
+    </div>
+</div>

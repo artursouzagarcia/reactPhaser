@@ -1,34 +1,48 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
-import phaserGame from './PhaserGame'
-import HelloWorldScene from './scenes/HelloWorldScene'
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 
-const handleClick = () => {
-  const scene = phaserGame.scene.keys.helloworld as HelloWorldScene
-  scene.createEmitter()
-}
+import Login from './pages/auth/login/Login'
+import ForgotPassword from './pages/auth/forgotPassword/ForgotPassword'
+import Home from './pages/home/Home'
+import Aprensentacao from './pages/jornada/apresentacao/Aprensentacao'
+import Game from './pages/jornada/game/Game'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Just a vanilla create-react-app overlaying a Phaser canvas :)</p>
-        <a
-          className="App-link"
-          href="https://github.com/kevinshen56714/create-react-phaser3-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View Source
-        </a>
-        <button className="App-button" onClick={handleClick}>
-          Or click me
-        </button>
-      </header>
-    </div>
+    <>
+		<div className="App">
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route path="/begin_password_reset" element={<ForgotPassword />} />
+					<Route path="/app" element={<Home />} />
+					<Route path="/apresentacao/:idJornada" element={<Aprensentacao />} />
+					<Route path="/game/:idJornada" element={<Game />} />
+					<Route path="/*" element={<h1>Pagina não encontrada</h1>} />				
+				</Routes>
+			</BrowserRouter>
+		</div>
+		<ToastContainer
+			position="bottom-center"
+			autoClose={ 5000 }
+			hideProgressBar={ false }
+			
+			newestOnTop={ false }
+			closeOnClick
+			rtl={ false }
+			pauseOnFocusLoss
+			draggable
+			pauseOnHover
+			className="toast-colored"
+		/>
+    
+    </>
   )
 }
 
 export default App
+
+
