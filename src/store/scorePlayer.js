@@ -13,7 +13,7 @@ class ScorePlayer {
     }
 
     increaseDiamantes(url) {
-        this.diamantes.push(url);
+        if (url) this.diamantes.push(url);
     }
 }
 

@@ -10,6 +10,11 @@ import Game from './pages/jornada/game/Game'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+declare namespace JSX {
+	interface IntrinsicElements {
+	  "lottie-player": any;
+	}
+  }
 function App() {
   return (
     <>

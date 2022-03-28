@@ -39,7 +39,7 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         //FUNCAO CREATE MONTA O JOGO
-        // this.scene.launch('ui');
+
         this.input.on('pointerup', this.handleClickInMap.bind(this));
         //cria mapa
         this.map = this.make.tilemap({ key: 'map' });
@@ -51,9 +51,14 @@ export default class GameScene extends Phaser.Scene {
         this.tiles = this.map.addTilesetImage('tileset_ground_campus', 'tiles');
 
         this.layer = this.map.createLayer('Ground', this.tiles, 0, 0);
-        this.layerElements = this.map.createLayer('Elementos2', this.tilesElements, 0, 0);
-        this.layerElements = this.map.createLayer('Elementos1', this.tilesElements, 0, 0);
+        this.layerElements2 = this.map.createLayer('Elementos2', this.tilesElements, 0, 0);
+        this.layerElements1 = this.map.createLayer('Elementos1', this.tilesElements, 0, 0);
         this.layerElements = this.map.createLayer('Elementos', this.tilesElements, 0, 0);
+        // this.layerElements2.setDepth(27);
+        // this.layerElements1.setDepth(26);
+        this.layerElements2.setDepth(10);
+        this.layerElements.setDepth(25);
+
         this.player = new Player(this, 45 + 50, 1060 + 200, 'avatarSprit');
         this.player.scale = 0.8;
         this.player.setDepth(15);
@@ -109,34 +114,11 @@ export default class GameScene extends Phaser.Scene {
 
         const Predio_campus1 = this.add.image(305 + 160, 720 + 220, 'imgPredio_campus1');
         const Predio_campus4 = this.add.image(400 + 160, 200 + 220, 'imgPredio_campus1');
-        const Predio_campus5 = this.add.image(815 + 160, 60 + 300, 'imgPredio_campus1');
-
-        const professor = this.add.image(1850 + 210, 1050 + 220, 'professorCarloslopes');
-
-        professor.setInteractive().on('pointerover', function (pointer, item) {
-            this.scene.rexUI.add
-                .toast({
-                    x: this.getBounds().x - 180,
-                    y: this.getBounds().y - 50,
-                    background: this.scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-                    text: this.scene.add.text(0, 0, '', {
-                        fontSize: '14px',
-                    }),
-                    space: {
-                        left: 20,
-                        right: 20,
-                        top: 20,
-                        bottom: 20,
-                    },
-                    duration: {
-                        hold: 3000,
-                    },
-                })
-                .showMessage(`Olá sou professor Carlos Lopes, está com dúvidas?`);
-        });
-        const PlacaProfessor = this.add.image(1810 + 210, 1050 + 220, 'placa_duvidas');
-        professor.scale = 0.8;
-        PlacaProfessor.scale = 0.8;
+        const Predio_campus5 = this.add.image(1010, 710, 'imgPredio_campus1');
+        Predio_campus1.setDepth(25);
+        Predio_campus4.setDepth(25);
+        Predio_campus5.setDepth(25);
+        // const Predio_campus5 = this.add.image(975, 360, 'imgPredio_campus1');
 
         // Place the player above the tile layers
         // this.player.setDepth(10);
@@ -144,10 +126,23 @@ export default class GameScene extends Phaser.Scene {
         // overheadLayer.setDepth(20);
 
         //DEFINE A CAMERA COM LIMITES DO MAPA, ZOOM 100%, CENTRALIZA EM 0,0 PARA COMEÇAR
+        // debugger;
+
+        const larguraContainerMiniCam = window.innerWidth > 900 ? 250 : 200;
+
+        this.minimap = this.cameras
+            // .add(window.innerWidth - tamanhoMiniMap.width / 5, 10, tamanhoMiniMap.width / 5, tamanhoMiniMap.height / 5)
+            .add(window.innerWidth - larguraContainerMiniCam, 10)
+            .setZoom(window.innerWidth > 900 ? 0.1 : 0.07)
+            .setName('mini');
+
+        this.minimap.alpha = 0.9;
+        this.minimap.setSize(larguraContainerMiniCam, window.innerWidth > 900 ? 200 : 150);
+        // this.minimap.setBackgroundColor(0x002244);
+        this.minimap.setBounds(0, 0);
+
         this.camera.setBounds(0, 0, this.map.width * 32, this.map.height * 32);
-
         this.camera.startFollow(this.player); //SEGUE O JOGADOR
-
         this.physics.add.collider(this.player, this.layer);
         this.configPathFinder();
     }

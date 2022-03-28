@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const ContainerArrowBack = styled.div`
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     margin: 0px 10px;
 

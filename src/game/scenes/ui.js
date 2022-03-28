@@ -1,15 +1,18 @@
 import Phaser from 'phaser';
 
 export default class UI extends Phaser.Scene {
-    constructor(scene) {
+    constructor(scene, teste) {
         super(scene);
-        this.scoreLevelDom = null;
+        this.scene = scene;
+        this.minimap = null;
     }
 
     create() {
-        this.scoreLevelDom = this.add.dom(215, 10, '#score');
-
-        this.scoreLevelDom.node.style.width = '400px';
-        this.scoreLevelDom.updateSize();
+        console.log('aq ui', this.scene);
+        this.minimap = this.cameras
+            .add(20, 10, window.innerWidth / 3, window.innerHeight / 3)
+            .setZoom(0.1)
+            .setName('mini');
+        this.minimap.alpha = 0.9;
     }
 }

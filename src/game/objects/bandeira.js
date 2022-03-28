@@ -118,6 +118,7 @@ export default class Bandeira extends Phaser.GameObjects.Image {
                 this.objAula.diamantes.posicao.y,
                 this.player,
                 this,
+                this.objAula.diamantes.url,
             );
             this.diamante.visible = false;
         }
@@ -146,7 +147,7 @@ export default class Bandeira extends Phaser.GameObjects.Image {
                 return; // Finaliza o click caso a aula ainda estaja bloqueada.
             }
 
-            //CLICANDO NO OBJETO MANDO ELE PARA LÁ NAS COORDANADAS ESPECIFICAS
+            //CLICANDO NO OBJETO MANDO  ELE PARA LÁ NAS COORDANADAS ESPECIFICAS
             //A BIBLIOTECA STAR CALCULA O TRAJETO EM TILES, POR ISSO AS COORDENADAS SÃO DIVIDAS PELO TILESIZE
             if (this.objAula?.diamantes && !this.objAula.diamantes.pego) {
                 this.diamante.setColoder();

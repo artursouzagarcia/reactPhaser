@@ -1,6 +1,14 @@
 import Phaser from 'phaser';
-const COLOR_PRIMARY = 0x007bff;
-
+import StoreToast from '../../store/StoreToast';
+import storeAmbienceSound from '../../store/StoreAmbienceSound';
+import coinSound from '../assets/soundfx/gold_sack.wav';
+import coinSound2 from '../assets/soundfx/mixkit-retro-game-notification-212.wav';
+import { autorun } from 'mobx';
+const VOLUME = 0.1;
+const myAudio = new Audio(coinSound);
+const myAudio2 = new Audio(coinSound2);
+myAudio.volume = VOLUME;
+myAudio2.volume = VOLUME;
 export default class SacoMoedas extends Phaser.GameObjects.Image {
     constructor(scene, x, y, playerSetPostion, player, bandeira) {
         super(scene, x, y, 'sacodemoedas');
@@ -25,27 +33,22 @@ export default class SacoMoedas extends Phaser.GameObjects.Image {
         });
 
         this.scene.physics.add.overlap(this.player, this, this._collectCoins.bind(this));
+
+        autorun(() => {
+            const newVolume = storeAmbienceSound.isPlaying ? VOLUME : 0;
+            myAudio.volume = newVolume;
+            myAudio2.volume = newVolume;
+        });
         // this.scene.sound.add('coinsbag', { loop: false });
     }
 
     _collectCoins(player, sacodemoedas) {
-        // contabiliza a moeda
-        this.scene.rexUI.add
-            .toast({
-                x: this.scene.camera.worldView.x + this.scene.camera.worldView.width / 2,
-                y: this.scene.camera.worldView.y + this.scene.camera.worldView.height - 100,
-                background: this.scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-                text: this.scene.add.text(0, 0, '', {
-                    fontSize: '18px',
-                }),
-                space: {
-                    left: 20,
-                    right: 20,
-                    top: 20,
-                    bottom: 20,
-                },
-            })
-            .showMessage('Olha um saco de moedas!');
+        myAudio2.play();
+        myAudio.play();
+        StoreToast.togggleToast(true, '💰 Parabens !!!', 'Você ganhou um saco de moedas.');
+        setTimeout(() => {
+            StoreToast.togggleToast(false, '', '');
+        }, 2000);
         this.bandeira.pegaMoeda();
         player.ganhaMoeda();
         //TOCA O EFEITO SONORO

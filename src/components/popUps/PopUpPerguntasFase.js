@@ -1,16 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import imgClose from '../../assets/close.png';
-
+import stiker from '../../game/assets/Sticker.png';
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md';
 import { Container } from './popUpStyles';
 import VideoPlayer from '../videoPlayer/VideoPlayer';
 
 const _alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
 
-function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objAulaSelecionada, storeCasoClinico }) {
+function PopUpPerguntasFase({
+    popUpAulaPerguntasIsOpen,
+    closePopUpAulaFase,
+    objAulaSelecionada,
+    storeCasoClinico,
+    pauseAmbiente,
+}) {
     const [aula, setAula] = useState({ ...objAulaSelecionada });
     const [vendoGabarito, setVendoGabarito] = useState(false);
     const [indexPerguntaVendo, setIndexPerguntaVendo] = useState(0);
+    const [vendoVideo, setVendoVideo] = useState(false);
 
     const pergunta = useMemo(() => {
         if (!aula) return null;
@@ -51,6 +58,7 @@ function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objA
                     className="close"
                     onClick={() => {
                         setVendoGabarito(false);
+                        setVendoVideo(false);
                         return closePopUpAulaFase();
                     }}
                 >
@@ -68,7 +76,7 @@ function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objA
                                 color: '#fff',
                             }}
                         >
-                            <div>
+                            <div style={{ flex: 1 }}>
                                 <h2 style={{ textAlign: 'center' }}>{pergunta?.pergunta}</h2>
                                 <div
                                     style={{
@@ -171,11 +179,37 @@ function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objA
                                 </div>
                             </div>
 
-                            {vendoGabarito && (
-                                <VideoPlayer
-                                    idVideo={pergunta.urlVideoGabarito.replace('https://watch.videodelivery.net/', '')}
-                                />
-                            )}
+                            {vendoGabarito &&
+                                (vendoVideo ? (
+                                    <div style={{ flex: 1 }}>
+                                        <VideoPlayer
+                                            pauseAmbiente={pauseAmbiente}
+                                            idVideo={pergunta.urlVideoGabarito.replace('https://watch.videodelivery.net/', '')}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div style={{ flex: 1 }}>
+                                        <img src={stiker} style={{ height: '100px' }} />
+                                        <h1>
+                                            {pergunta.resposta == pergunta.gabarito
+                                                ? `😔 Resposta Incorreta`
+                                                : `🔥 Resposta Correta`}
+                                        </h1>
+
+                                        <button
+                                            style={{
+                                                padding: '10px',
+                                                border: 'none',
+                                                borderRadius: '8px',
+                                                color: '#fff',
+                                                background: '#1a8616',
+                                            }}
+                                            onClick={() => setVendoVideo(true)}
+                                        >
+                                            Ver Gabarito
+                                        </button>
+                                    </div>
+                                ))}
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
                             <button style={styleBtn}>Voltar</button>
@@ -187,6 +221,7 @@ function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objA
                                             setVendoGabarito(false);
                                             closePopUpAulaFase();
                                         }
+                                        setVendoVideo(false);
                                         setIndexPerguntaVendo((old) => old + 1);
                                         setVendoGabarito(false);
                                     }}

@@ -7,7 +7,7 @@ import PopUpPerguntasFase from './PopUpPerguntasFase';
 import VideoPlayer from '../videoPlayer/VideoPlayer';
 import stikerMedico from '../../game/assets/Sticker.png';
 
-function PopUpVideo({ objAulaSelecionada }) {
+function PopUpVideo({ objAulaSelecionada, pauseAmbiente }) {
     const [popUpAulaPerguntasIsOpen, setPopUpAulaPerguntasIsOpen] = useState(false);
 
     function closePopUpVideo(params) {
@@ -55,7 +55,7 @@ function PopUpVideo({ objAulaSelecionada }) {
             objAulaSelecionada={objAulaSelecionada}
         />
     ) : (
-        <Container className="popup" id="popUpFase" style={{ display: 'flex', backgroudColor: '#ffffffc2' }}>
+        <Container className="popup" id="popUpFase" style={{ display: 'flex' }}>
             <div className="contentPopUp">
                 <div className="TitlePopUp">
                     <span id="TitlePopUp">{`${objAulaSelecionada.ordem}ª FASE`}</span>
@@ -65,7 +65,10 @@ function PopUpVideo({ objAulaSelecionada }) {
                 </div>
                 <div className="conteudoPopUp">
                     <div className="video">
-                        <VideoPlayer idVideo={objAulaSelecionada.URL.replace('https://watch.videodelivery.net/', '')} />
+                        <VideoPlayer
+                            idVideo={objAulaSelecionada.URL.replace('https://watch.videodelivery.net/', '')}
+                            pauseAmbiente={pauseAmbiente}
+                        />
                     </div>
                     <h3 id="titleVideoPopUp">{objAulaSelecionada.Title}</h3>
                     {/* <h4 id="autorVideoPopUp">{objAulaSelecionada.Author}</h4> */}

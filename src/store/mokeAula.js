@@ -386,10 +386,12 @@ export default [
         ],
         casoClinico: {
             posicao: {
-                x: 1020,
-                y: 710,
+                x: 990,
+                y: 355,
+                // x: 1020,
+                // y: 710,
             },
-            playerPostion: { x: 31, y: 30 },
+            playerPostion: { x: 38, y: 18 },
             desbloqueado: false,
             perguntas: [
                 {

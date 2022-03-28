@@ -1,10 +1,15 @@
+import { autorun } from 'mobx';
 import Phaser from 'phaser';
-const COLOR_PRIMARY = 0x007bff;
-
+import StoreAmbienceSound from '../../store/StoreAmbienceSound';
+import StoreToast from '../../store/StoreToast';
+import coinSound2 from '../assets/soundfx/mixkit-retro-game-notification-212.wav';
+const myAudio2 = new Audio(coinSound2);
+const VOLUME = 0.1;
+myAudio2.volume = VOLUME;
 export default class Diamantes extends Phaser.GameObjects.Image {
-    constructor(scene, x, y, player, bandeira) {
+    constructor(scene, x, y, player, bandeira, url) {
         super(scene, x, y, 'diamante');
-
+        this.url = url || '';
         this.player = player;
         this.scene.add.existing(this);
         this.interactveAula = this.setInteractive();
@@ -16,16 +21,12 @@ export default class Diamantes extends Phaser.GameObjects.Image {
     }
 
     _init() {
-        // this.interactveAula.on('pointerup', () => {
-        //     //CLICANDO NO OBJETO MANDO ELE PARA LÁ NAS COORDANADAS ESPECIFICAS
-        //     //A BIBLIOTECA STAR CALCULA O TRAJETO EM TILES, POR ISSO AS COORDENADAS SÃO DIVIDAS PELO TILESIZE
-        //     const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
-        //     this.scene.findPathAndMove(PlayerX, PlayerY, this.playerSetPostion.x / 32, this.playerSetPostion.y / 32);
-        // });
-
         this.scale = 0.9;
 
-        // this.scene.sound.add('coinsbag', { loop: false });
+        autorun(() => {
+            const newVolume = StoreAmbienceSound.isPlaying ? VOLUME : 0;
+            myAudio2.volume = newVolume;
+        });
     }
 
     setColoder() {
@@ -37,26 +38,15 @@ export default class Diamantes extends Phaser.GameObjects.Image {
     }
 
     _collectCoins(player, sacodemoedas) {
-        // contabiliza a moeda
-        console.log('pegou diamanteeeee');
-        this.scene.rexUI.add
-            .toast({
-                x: this.scene.camera.worldView.x + this.scene.camera.worldView.width / 2,
-                y: this.scene.camera.worldView.y + this.scene.camera.worldView.height - 100,
-                background: this.scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-                text: this.scene.add.text(0, 0, '', {
-                    fontSize: '18px',
-                }),
-                space: {
-                    left: 20,
-                    right: 20,
-                    top: 20,
-                    bottom: 20,
-                },
-            })
-            .showMessage('Olha um dimante!');
+        myAudio2.play();
+
+        // contabiliza a diamante
+        StoreToast.togggleToast(true, '♦ Parabens !!!', 'Você ganhou um diamante.');
+        setTimeout(() => {
+            StoreToast.togggleToast(false, '', '');
+        }, 2000);
         this.bandeira.pegaDiamante();
-        player.ganhaDiamantes();
+        player.ganhaDiamantes(this.url);
         //TOCA O EFEITO SONORO
         // this.collectcoinsaudioFX.play();
         //SOME COM O "CORPO"

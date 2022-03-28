@@ -1,5 +1,12 @@
 import Phaser from 'phaser';
-
+import scorePlayer from '../../store/scorePlayer';
+import soundClick from '../assets/soundfx/mixkit-gate-latch-click-1924.wav';
+import soundFootsteps from '../assets/soundfx/mixkit-crunchy-footsteps-loop-535.wav';
+import StoreAmbienceSound from '../../store/StoreAmbienceSound';
+import { autorun } from 'mobx';
+const VOLUME = 0.1;
+const myAudio2 = new Audio(soundClick);
+myAudio2.volume = VOLUME;
 export default class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprit) {
         super(scene, x, y, sprit);
@@ -63,6 +70,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
             repeat: -1,
         });
         this.play('idle');
+
+        autorun(() => {
+            const newVolume = StoreAmbienceSound.isPlaying ? VOLUME : 0;
+
+            myAudio2.volume = newVolume;
+        });
     }
 
     getPositionInTiles() {
@@ -70,19 +83,20 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     move(path, map, acaoDepoisDeAndar) {
+        myAudio2.play();
         //FUNC QUE CRIA TIMELINE DE TWEENS QUE SÃO ALTERAÇÕES SEQUENCIAIS DE PROPS DE UM OBJETO
         // Sets up a list of tweens, one for each tile to walk, that will be chained by the timeline
         if (this.timeline) {
             this.timeline.destroy();
         }
+        // footstepsAudio.play();
         const tweensList = path.map(({ x: ex, y: ey }) => {
             this.target.x = ex * map.tileWidth;
             this.target.y = ey * map.tileHeight;
-
             return {
                 targets: this,
-                x: { value: ex * map.tileWidth, duration: window.location.origin.includes('localhost') ? 10 : 100 },
-                y: { value: ey * map.tileHeight, duration: window.location.origin.includes('localhost') ? 10 : 100 },
+                x: { value: ex * map.tileWidth, duration: 100 },
+                y: { value: ey * map.tileHeight, duration: 100 },
                 onComplete: (e) => {
                     // console.log(e);
                     const eixoX = e.data[0];
@@ -128,19 +142,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     ganhaMoeda() {
         this.qtdMoedas++;
-
-        const elementValorMoedas = document.getElementById('ValorMoedas');
-        if (elementValorMoedas) elementValorMoedas.innerText = this.qtdMoedas;
-
+        scorePlayer.increaseMoedas();
         console.log('O player agora tem ' + this.qtdMoedas + ' moedas.');
     }
 
-    ganhaDiamantes() {
+    ganhaDiamantes(url) {
         this.qtdDiamantes++;
+        scorePlayer.increaseDiamantes(url);
 
-        const elementValorMoedas = document.getElementById('ValorMoedas');
-        if (elementValorMoedas) elementValorMoedas.innerText = this.qtdMoedas;
-
-        console.log('O player agora tem ' + this.qtdMoedas + ' moedas.');
+        console.log('O player agora tem ' + this.qtdDiamantes + ' diamantes.');
     }
 }

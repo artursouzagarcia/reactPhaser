@@ -42,7 +42,7 @@ export default class CasoClinico extends Phaser.GameObjects.Image {
             console.log('Clicou no caso clinico');
 
             if (!this.desbloqueado) {
-                storeToast.togggleToast(true, '🏥 Poxa 😔.', 'Esta estes casos clinicos ainda não foram desbloqueados.');
+                storeToast.togggleToast(true, '🏥 Poxa 😔.', 'Estes casos clinicos ainda não foram desbloqueados.');
 
                 setTimeout(() => {
                     // só para limpar o obj
