@@ -19,6 +19,7 @@ export default class CasoClinico extends Phaser.GameObjects.Image {
     }
 
     init() {
+        this.scale = 1.3;
         if (!this.casoClinico.desbloqueado) {
             //inicia a bandeira bandeiras bloqueadas com cadeado
             this.meuCadeado = this.scene.add.image(this.x - 38, this.y + 115, 'cadeadoNew');

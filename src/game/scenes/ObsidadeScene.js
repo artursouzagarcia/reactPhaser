@@ -59,7 +59,7 @@ export default class GameScene extends Phaser.Scene {
         this.layerElements2.setDepth(10);
         this.layerElements.setDepth(25);
 
-        this.player = new Player(this, 45 + 50, 1060 + 200, 'avatarSprit');
+        this.player = new Player(this, 130, 1200, 'avatarSprit');
         this.player.scale = 0.8;
         this.player.setDepth(15);
         this.particles = this.add.particles('white');
@@ -79,7 +79,7 @@ export default class GameScene extends Phaser.Scene {
                 const bandeira = new Bandeira(
                     this,
                     positions.x + 150,
-                    positions.y + 220,
+                    positions.y + 150,
                     playerPostion,
                     this.player,
                     Title,
@@ -95,7 +95,7 @@ export default class GameScene extends Phaser.Scene {
                 const bandeira = new Bandeira(
                     this,
                     positions.x + 50,
-                    positions.y + 200,
+                    positions.y + 160,
                     playerPostion,
                     this.player,
                     Title,
@@ -112,9 +112,13 @@ export default class GameScene extends Phaser.Scene {
 
         this.map.currentLayerIndex = 0;
 
-        const Predio_campus1 = this.add.image(305 + 160, 720 + 220, 'imgPredio_campus1');
-        const Predio_campus4 = this.add.image(400 + 160, 200 + 220, 'imgPredio_campus1');
-        const Predio_campus5 = this.add.image(1010, 710, 'imgPredio_campus1');
+        const Predio_campus1 = this.add.image(455, 890, 'imgPredio_campus1');
+        const Predio_campus4 = this.add.image(550, 380, 'imgPredio_campus1');
+        const Predio_campus5 = this.add.image(995, 690, 'imgPredio_campus1');
+
+        Predio_campus1.scale = 1.35;
+        Predio_campus4.scale = 1.35;
+        Predio_campus5.scale = 1.15;
         Predio_campus1.setDepth(25);
         Predio_campus4.setDepth(25);
         Predio_campus5.setDepth(25);
@@ -143,6 +147,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.camera.setBounds(0, 0, this.map.width * 32, this.map.height * 32);
         this.camera.startFollow(this.player); //SEGUE O JOGADOR
+
         this.physics.add.collider(this.player, this.layer);
         this.configPathFinder();
     }

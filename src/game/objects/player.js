@@ -29,15 +29,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         this.scene.anims.create({
             key: 'idle',
-            frames: this.scene.anims.generateFrameNumbers('avatarSprit', { frames: [6] }),
-            frameRate: 8,
+            frames: this.scene.anims.generateFrameNumbers('avatarSprit', { frames: [18] }),
+            frameRate: 1,
             repeat: -1,
         });
 
         this.scene.anims.create({
             key: 'left',
             frames: this.scene.anims.generateFrameNumbers('avatarSprit', {
-                frames: [0, 1, 2, 3],
+                frames: [8, 7, 6, 5, 4, 3, 2, 1, 0],
             }),
             frameRate: 12,
             repeat: -1,
@@ -46,7 +46,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: 'right',
             frames: this.scene.anims.generateFrameNumbers('avatarSprit', {
-                frames: [4, 5, 7, 8],
+                frames: [9, 10, 11, 12, 13, 14, 15, 16, 17],
             }),
             frameRate: 12,
             repeat: -1,
@@ -55,7 +55,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: 'top',
             frames: this.scene.anims.generateFrameNumbers('avatarSprit', {
-                frames: [10, 9, 11],
+                frames: [19, 20],
             }),
             frameRate: 12,
             repeat: -1,
@@ -64,7 +64,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: 'bottom',
             frames: this.scene.anims.generateFrameNumbers('avatarSprit', {
-                frames: [13, 12, 14],
+                frames: [21, 22],
             }),
             frameRate: 12,
             repeat: -1,
@@ -95,8 +95,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.target.y = ey * map.tileHeight;
             return {
                 targets: this,
-                x: { value: ex * map.tileWidth, duration: 100 },
-                y: { value: ey * map.tileHeight, duration: 100 },
+                // x: { value: ex * map.tileWidth, duration: 100 },
+                // y: { value: ey * map.tileHeight, duration: 100 },
+                x: { value: ex * map.tileWidth, duration: window.location.origin.includes('localhost') ? 10 : 100 },
+                y: { value: ey * map.tileHeight, duration: window.location.origin.includes('localhost') ? 10 : 100 },
                 onComplete: (e) => {
                     // console.log(e);
                     const eixoX = e.data[0];
@@ -106,18 +108,22 @@ export default class Player extends Phaser.GameObjects.Sprite {
                         // movimentando no eixo X
                         if (eixoX.end > eixoX.start) {
                             //direita
+                            console.log('right');
                             this.play('right', true);
                         } else {
                             //esquerda
+                            console.log('left');
                             this.play('left', true);
                         }
                     } else {
                         // movimentando no eixo Y
                         if (eixoY.end > eixoY.start) {
                             //baixo
+                            console.log('bottom');
                             this.play('bottom', true);
                         } else {
                             //cima
+                            console.log('bottom');
                             this.play('top', true);
                         }
                     }

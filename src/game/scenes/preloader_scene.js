@@ -16,6 +16,7 @@ import tooltipBG from '../assets/tooltipBG.png';
 import professor_carloslopes from '../assets/professor_carloslopes.png';
 import placa_duvidas from '../assets/placa_duvidas.png';
 import diploma from '../assets/Diploma.png';
+import bandeiraTeste from '../assets/aula1.png';
 
 import bandeiraD1 from '../assets/seta_direita1.png';
 import bandeiraD2 from '../assets/seta_direita2.png';
@@ -163,7 +164,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
         this.load.spritesheet('avatarSprit', avatar_sprite, {
             frameWidth: 64,
-            frameHeight: 104,
+            frameHeight: 128,
         });
 
         this.load.spritesheet('cadeadoSprite', avatar_sprite, {
@@ -184,7 +185,8 @@ export default class PreloaderScene extends Phaser.Scene {
         console.log(bandeiraD1, bandeiraD2, bandeiraD3, bandeiraE1, bandeiraE2, bandeiraE3);
         // this.textures.addBase64('bandeiraD1', bandeiraD1);
 
-        this.load.image('bandeiraD1', bandeiraD1);
+        this.load.image('bandeiraD1', bandeiraTeste);
+        // this.load.image('bandeiraD1', bandeiraD1);
         this.load.image('bandeiraD2', bandeiraD2);
         this.load.image('bandeiraD3', bandeiraD3);
 

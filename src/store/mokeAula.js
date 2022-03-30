@@ -11,10 +11,10 @@ export default [
         Author: 'Carlos J C Lopes',
         AuthorPicture: 'https://medxdata.blob.core.windows.net/docflix/07935a7c-9ad9-452f-91b2-dcd6294fd54d.jpg',
         positions: {
-            x: 120,
+            x: 95,
             y: 980,
         },
-        playerPostion: { x: 4, y: 33 },
+        playerPostion: { x: 4, y: 31 },
         desbloqueada: true,
         concluido: false,
         perguntas: [],
@@ -40,10 +40,10 @@ export default [
         Author: 'Carlos J C Lopes',
         AuthorPicture: 'https://medxdata.blob.core.windows.net/docflix/07935a7c-9ad9-452f-91b2-dcd6294fd54d.jpg',
         positions: {
-            x: 420,
+            x: 400,
             y: 980,
         },
-        playerPostion: { x: 13, y: 33 },
+        playerPostion: { x: 13, y: 31 },
         desbloqueada: false,
         concluido: false,
         perguntas: [
@@ -77,7 +77,7 @@ export default [
             x: 600,
             y: 980,
         },
-        playerPostion: { x: 19, y: 33 },
+        playerPostion: { x: 19, y: 31 },
         desbloqueada: false,
         concluido: false,
         perguntas: [],
@@ -98,7 +98,7 @@ export default [
             x: 880,
             y: 980,
         },
-        playerPostion: { x: 28, y: 33 },
+        playerPostion: { x: 28, y: 31 },
         desbloqueada: false,
         concluido: false,
         perguntas: [],
@@ -119,7 +119,7 @@ export default [
             x: 1280,
             y: 980,
         },
-        playerPostion: { x: 40, y: 33 },
+        playerPostion: { x: 40, y: 31 },
         desbloqueada: false,
         concluido: false,
         perguntas: [
@@ -164,7 +164,7 @@ export default [
             x: 1550,
             y: 980,
         },
-        playerPostion: { x: 50, y: 33 },
+        playerPostion: { x: 50, y: 31 },
         desbloqueada: false,
         concluido: false,
         perguntas: [
@@ -184,8 +184,8 @@ export default [
         ],
         casoClinico: {
             posicao: {
-                x: 1700,
-                y: 710,
+                x: 1690,
+                y: 685,
             },
 
             playerPostion: { x: 52, y: 30 },
@@ -355,7 +355,7 @@ export default [
         Author: 'Carlos J C Lopes',
         AuthorPicture: 'https://medxdata.blob.core.windows.net/docflix/07935a7c-9ad9-452f-91b2-dcd6294fd54d.jpg',
         positions: {
-            x: 700,
+            x: 670,
             y: 315,
         },
         playerPostion: { x: 22, y: 12 },
@@ -386,8 +386,8 @@ export default [
         ],
         casoClinico: {
             posicao: {
-                x: 990,
-                y: 355,
+                x: 957,
+                y: 200,
                 // x: 1020,
                 // y: 710,
             },
@@ -509,7 +509,7 @@ export default [
         Author: 'Carlos J C Lopes',
         AuthorPicture: 'https://medxdata.blob.core.windows.net/docflix/07935a7c-9ad9-452f-91b2-dcd6294fd54d.jpg',
         positions: {
-            x: 930,
+            x: 980,
             y: 315,
         },
         playerPostion: { x: 29, y: 12 },
