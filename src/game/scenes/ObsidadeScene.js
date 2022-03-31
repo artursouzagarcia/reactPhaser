@@ -56,14 +56,10 @@ export default class GameScene extends Phaser.Scene {
         this.layerElements = this.map.createLayer('Elementos', this.tilesElements, 0, 0);
         // this.layerElements2.setDepth(27);
         // this.layerElements1.setDepth(26);
-        this.layerElements2.setDepth(10);
-        this.layerElements.setDepth(25);
 
         this.player = new Player(this, 130, 1200, 'avatarSprit');
         this.player.scale = 0.8;
-        this.player.setDepth(15);
         this.particles = this.add.particles('white');
-        this.particles.setDepth(5);
         this.emitter = this.particles.createEmitter({
             speed: 80,
             scale: { start: 0.07, end: 0 },
@@ -150,6 +146,13 @@ export default class GameScene extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.layer);
         this.configPathFinder();
+
+        this.layer.setDepth(0);
+        this.particles.setDepth(5);
+        this.layerElements.setDepth(10); // layer primeira arvore
+        this.player.setDepth(15);
+        this.layerElements1.setDepth(25);
+        this.layerElements2.setDepth(25);
     }
 
     update() {
