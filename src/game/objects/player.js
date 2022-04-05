@@ -95,8 +95,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.target.y = ey * map.tileHeight;
             return {
                 targets: this,
-                // x: { value: ex * map.tileWidth, duration: 100 },
-                // y: { value: ey * map.tileHeight, duration: 100 },
                 x: { value: ex * map.tileWidth, duration: window.location.origin.includes('localhost') ? 10 : 100 },
                 y: { value: ey * map.tileHeight, duration: window.location.origin.includes('localhost') ? 10 : 100 },
                 onComplete: (e) => {
