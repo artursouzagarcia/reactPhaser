@@ -10,7 +10,8 @@ import CasoClinico from './casoClinico';
 const COLOR_PRIMARY = 0x007bff;
 export default class Bandeira extends Phaser.GameObjects.Image {
     constructor(scene, x, y, playerSetPostion, player, name, sacoMoedas, restoObj, proximaBandeira, emitter) {
-        super(scene, x, y, restoObj.left ? `bandeiraE${restoObj.ordem}` : `bandeiraD${restoObj.ordem}`);
+        super(scene, x, y, `bandeiraD${restoObj.ordem}`);
+        // super(scene, x, y, restoObj.left ? `bandeiraE${restoObj.ordem}` : `bandeiraD${restoObj.ordem}`);
         this.X = x;
         this.Y = y;
         this.name = name;
@@ -72,10 +73,14 @@ export default class Bandeira extends Phaser.GameObjects.Image {
             console.log('criou saco');
             new SacoMoedas(this.scene, this.sacoMoedas.x, this.sacoMoedas.y, this.sacoMoedas.playerPostion, this.player, this);
         }
+        if (this.objAula?.diamantes && !this.objAula.diamantes.pego) {
+            this.diamante.setColoder();
+        }
     }
 
     _init() {
         this.setDepth(10);
+
         if (this.objAula.casoClinico) {
             //cria caso clinico caso existea na bandeira
             this.casoClinico = new CasoClinico(
@@ -91,7 +96,7 @@ export default class Bandeira extends Phaser.GameObjects.Image {
         }
 
         if (this.objAula.diploma) {
-            let diploma = this.scene.add.image(1700, 520, 'diploma');
+            let diploma = this.scene.add.image(1700, 450, 'diploma');
             diploma.setDepth(10);
             let particles = this.scene.add.particles('red');
             particles.setDepth(5);
@@ -149,9 +154,7 @@ export default class Bandeira extends Phaser.GameObjects.Image {
 
             //CLICANDO NO OBJETO MANDO  ELE PARA LÁ NAS COORDANADAS ESPECIFICAS
             //A BIBLIOTECA STAR CALCULA O TRAJETO EM TILES, POR ISSO AS COORDENADAS SÃO DIVIDAS PELO TILESIZE
-            if (this.objAula?.diamantes && !this.objAula.diamantes.pego) {
-                this.diamante.setColoder();
-            }
+
             if (this.diploma && this.diploma.element && this.diploma.turnVisible) {
                 this.diploma.turnVisible();
             }

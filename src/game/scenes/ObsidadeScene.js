@@ -103,7 +103,7 @@ export default class GameScene extends Phaser.Scene {
                 this.Bandeiras.push(bandeira);
             }
         }
-        this.Bandeiras.forEach((Bandeiras) => (Bandeiras.scale = 0.8));
+        this.Bandeiras.forEach((Bandeiras) => (Bandeiras.scale = 0.6));
         // console.log(this.Bandeiras);
 
         this.map.currentLayerIndex = 0;

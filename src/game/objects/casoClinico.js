@@ -3,6 +3,8 @@ import Phaser from 'phaser';
 import StoreCasoClinico from '../../store/StoreCasoClinico';
 import storeTooltip from '../../store/StoreTooltip';
 import storeToast from '../../store/StoreToast';
+import storeJornada from '../../store/StoreJornada';
+import storeCasoClinico from '../../store/StoreCasoClinico';
 
 export default class CasoClinico extends Phaser.GameObjects.Image {
     constructor(scene, x, y, casoClinico, player) {
@@ -22,7 +24,7 @@ export default class CasoClinico extends Phaser.GameObjects.Image {
         this.scale = 1.3;
         if (!this.casoClinico.desbloqueado) {
             //inicia a bandeira bandeiras bloqueadas com cadeado
-            this.meuCadeado = this.scene.add.image(this.x - 38, this.y + 115, 'cadeadoNew');
+            this.meuCadeado = this.scene.add.image(this.x - 50, this.y + 145, 'cadeadoNew');
             this.meuCadeado.scale = 0.4;
             this.meuCadeado.setDepth(10);
         }
@@ -40,7 +42,8 @@ export default class CasoClinico extends Phaser.GameObjects.Image {
 
     _initClickOn() {
         this.interactveAula.on('pointerup', () => {
-            console.log('Clicou no caso clinico');
+            if (storeJornada.popUpVideoAulaAberto || storeCasoClinico.popUpVideoAulaAberto)
+                return console.log('tentou abrir outro popup por cima.');
 
             if (!this.desbloqueado) {
                 storeToast.togggleToast(true, '🏥 Poxa 😔.', 'Estes casos clinicos ainda não foram desbloqueados.');

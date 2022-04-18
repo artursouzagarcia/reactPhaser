@@ -191,9 +191,9 @@ function PopUpPerguntasFase({
                                     <div style={{ flex: 1 }}>
                                         <img src={stiker} style={{ height: '100px' }} />
                                         <h1>
-                                            {pergunta.resposta == pergunta.gabarito
+                                            {pergunta.resposta != pergunta.gabarito
                                                 ? `😔 Resposta Incorreta`
-                                                : `🔥 Resposta Correta`}
+                                                : `🥳 Resposta Correta`}
                                         </h1>
 
                                         <button
