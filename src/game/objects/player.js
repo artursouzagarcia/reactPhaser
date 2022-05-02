@@ -106,22 +106,22 @@ export default class Player extends Phaser.GameObjects.Sprite {
                         // movimentando no eixo X
                         if (eixoX.end > eixoX.start) {
                             //direita
-                            console.log('right');
+                            // console.log('right');
                             this.play('right', true);
                         } else {
                             //esquerda
-                            console.log('left');
+                            // console.log('left');
                             this.play('left', true);
                         }
                     } else {
                         // movimentando no eixo Y
                         if (eixoY.end > eixoY.start) {
                             //baixo
-                            console.log('bottom');
+                            // console.log('bottom');
                             this.play('bottom', true);
                         } else {
                             //cima
-                            console.log('bottom');
+                            // console.log('bottom');
                             this.play('top', true);
                         }
                     }

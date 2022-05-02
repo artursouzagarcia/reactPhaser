@@ -165,7 +165,7 @@ export default [
             y: 980,
         },
         playerPostion: { x: 50, y: 31 },
-        desbloqueada: true,
+        desbloqueada: false,
         concluido: false,
         perguntas: [
             {
@@ -367,7 +367,7 @@ export default [
             y: 315,
         },
         playerPostion: { x: 22, y: 10 },
-        desbloqueada: true,
+        desbloqueada: false,
         concluido: false,
         perguntas: [
             {

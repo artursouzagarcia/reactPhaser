@@ -6,6 +6,7 @@ class StorePopUps {
         listPDFs: false,
         leitoPDF: false,
         referencias: false,
+        auditorio: false,
     };
 
     constructor() {

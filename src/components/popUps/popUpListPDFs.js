@@ -3,6 +3,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { Container } from './popUpStyles';
 import imgClose from '../../assets/close.png';
 import imgDiamante from '../../game/assets/diamante.png';
+
 const PopUpListPDFs = ({ closePopUp, diamantesPegos }) => {
     const [mostraPopUpListaPDFs, setMostraPopUpListaPDFs] = useState({ isOpen: true, indexPergunta: 0 });
     const [pdfSelecionado, setPdfSelecionado] = useState('');

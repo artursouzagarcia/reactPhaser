@@ -2,6 +2,7 @@ import EasyStar from 'easystarjs';
 import Phaser from 'phaser';
 import Player from '../objects/player';
 import Bandeira from '../objects/bandeira';
+import Auditorio from '../objects/auditorio';
 import PhaserTooltip, { addTooltip } from '../components/tooltips';
 import aulasMOKE from '../../store/mokeAula';
 
@@ -110,15 +111,13 @@ export default class GameScene extends Phaser.Scene {
 
         const Predio_campus1 = this.add.image(455, 890, 'imgPredio_campus1');
         const Predio_campus4 = this.add.image(550, 380, 'imgPredio_campus1');
-        const Predio_campus5 = this.add.image(995, 690, 'imgPredio_campus1');
+
+        const Predio_auditorio = new Auditorio(this, 995, 690, this.player, 'Auditório');
 
         Predio_campus1.scale = 1.35;
         Predio_campus4.scale = 1.35;
-        Predio_campus5.scale = 1.15;
         Predio_campus1.setDepth(25);
         Predio_campus4.setDepth(25);
-        Predio_campus5.setDepth(25);
-        // const Predio_campus5 = this.add.image(975, 360, 'imgPredio_campus1');
 
         // Place the player above the tile layers
         // this.player.setDepth(10);

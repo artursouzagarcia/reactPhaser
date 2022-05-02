@@ -30,6 +30,7 @@ import aulasMOKE from '../../../store/mokeAula';
 import PopUpPerguntasFase from '../../../components/popUps/PopUpPerguntasFase';
 import PopUpPerguntaEnviada from '../../../components/popUps/popUpPerguntaEnviada';
 import PopUpListPDFs from '../../../components/popUps/popUpListPDFs';
+import PopUpAuditorio from '../../../components/popUps/popUpAuditorio';
 import graduation from '../../../components/animacoes/87227-graduation.gif';
 import soundError from '../../../game/assets/soundfx/mixkit-click-error-1110.wav';
 import soundAmbience from '../../../game/assets/soundfx/mixkit-forest-birds-ambience-1210.wav';
@@ -189,6 +190,10 @@ export default observer(() => {
 
             {storePopUps.popups.listPDFs && (
                 <PopUpListPDFs closePopUp={() => storePopUps.closeAllPopUps()} diamantesPegos={ScorePlayer.diamantes} />
+            )}
+
+            {storePopUps.popups.auditorio && (
+                <PopUpAuditorio closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
             )}
 
             {jornadaSelecionada && storeJornada.popUpVideoAulaAberto && (
