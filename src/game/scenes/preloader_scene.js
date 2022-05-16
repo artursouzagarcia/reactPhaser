@@ -5,6 +5,8 @@ import tileset_elements_campus from '../assets/tilemaps/tiles/tileset_elements_c
 import seta_direita from '../assets/seta_direita.png';
 import predio_campus1 from '../assets/predio_campus1.png';
 import predio_campus2 from '../assets/predio_campus2.png';
+import predio_biblioteca from '../assets/predio_biblioteca.png';
+import predio_auditorio from '../assets/predio_auditorio.png';
 import sacodemoedas from '../assets/Sacodemoedas.png';
 import diamante from '../assets/diamante.png';
 import Duvida from '../assets/Duvida.png';
@@ -146,6 +148,8 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('imgBandeira', seta_direita);
         this.load.image('imgPredio_campus1', predio_campus1);
         this.load.image('imgPredio_campus2', predio_campus2);
+        this.load.image('predio_biblioteca', predio_biblioteca);
+        this.load.image('predio_auditorio', predio_auditorio);
         this.load.image('sacodemoedas', sacodemoedas);
         this.load.image('diamante', diamante);
         this.load.image('duvidas', Duvida);

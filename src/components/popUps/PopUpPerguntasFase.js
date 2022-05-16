@@ -1,20 +1,16 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import imgClose from '../../assets/close.png';
 import stiker from '../../game/assets/Sticker.png';
-import { MdRadioButtonChecked, MdRadioButtonUnchecked } from 'react-icons/md';
 import { Container } from './popUpStyles';
 import VideoPlayer from '../videoPlayer/VideoPlayer';
 
 const _alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
 
-function PopUpPerguntasFase({
-    popUpAulaPerguntasIsOpen,
-    closePopUpAulaFase,
-    objAulaSelecionada,
-    storeCasoClinico,
-    pauseAmbiente,
-}) {
-    const [aula, setAula] = useState({ ...objAulaSelecionada });
+function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objAulaSelecionada, casoClinico, pauseAmbiente }) {
+    const [aula, setAula] = useState({
+        ...objAulaSelecionada,
+        perguntas: casoClinico ? objAulaSelecionada.casoClinico.perguntas : objAulaSelecionada.perguntas,
+    });
     const [vendoGabarito, setVendoGabarito] = useState(false);
     const [indexPerguntaVendo, setIndexPerguntaVendo] = useState(0);
     const [vendoVideo, setVendoVideo] = useState(false);
@@ -25,7 +21,10 @@ function PopUpPerguntasFase({
     }, [indexPerguntaVendo, aula]);
 
     useEffect(() => {
-        setAula({ ...objAulaSelecionada });
+        setAula({
+            ...objAulaSelecionada,
+            perguntas: casoClinico ? objAulaSelecionada.casoClinico.perguntas : objAulaSelecionada.perguntas,
+        });
         setVendoGabarito(false);
         setIndexPerguntaVendo(0);
     }, [objAulaSelecionada]);
@@ -51,7 +50,9 @@ function PopUpPerguntasFase({
             <div className="contentPopUp">
                 <div className="TitlePopUp">
                     <span id="TitlePopUp">
-                        {storeCasoClinico ? 'Caso Clínico' : `Exercícios da ${objAulaSelecionada.ordem}ª FASE`}
+                        {casoClinico
+                            ? `Casos clínicos da aula ${objAulaSelecionada.ordem}`
+                            : `Exercícios da ${objAulaSelecionada.ordem}ª FASE`}
                     </span>
                 </div>
                 <div
@@ -126,13 +127,7 @@ function PopUpPerguntasFase({
                                                     marginLeft: '10px',
                                                     fontSize: '16px',
                                                     textAlign: 'start',
-
                                                     fontWeight: 600,
-                                                    // fontWeight:
-                                                    //     pergunta.resposta === indexOpcao ||
-                                                    //     (vendoGabarito && pergunta.gabarito == indexOpcao)
-                                                    //         ? 600
-                                                    //         : 400,
                                                     color: (() => {
                                                         let cor = '#fff';
                                                         if (indexOpcao != pergunta.resposta && indexOpcao != pergunta.gabarito)
@@ -143,15 +138,6 @@ function PopUpPerguntasFase({
 
                                                         if (vendoGabarito) {
                                                             cor = '#fff';
-                                                            // if (indexOpcao === pergunta.resposta) {
-                                                            //     if (pergunta.resposta === pergunta.gabarito) {
-                                                            //         return '#4bff44';
-                                                            //     } else {
-                                                            //         return 'red';
-                                                            //     }
-                                                            // } else {
-                                                            //     return '#4bff44';
-                                                            // }
                                                         }
                                                         return cor;
                                                     })(),
@@ -163,7 +149,7 @@ function PopUpPerguntasFase({
                                                 indexOpcao === pergunta.resposta &&
                                                 pergunta.resposta === pergunta.gabarito && (
                                                     <span style={{ marginTop: '10px', color: '#000', fontWeight: 600 }}>
-                                                        Parabens, voce acertou!
+                                                        Parabéns, voce acertou!
                                                     </span>
                                                 )}
 
@@ -171,7 +157,7 @@ function PopUpPerguntasFase({
                                                 indexOpcao === pergunta.resposta &&
                                                 pergunta.resposta !== pergunta.gabarito && (
                                                     <span style={{ marginTop: '10px', color: '#000', fontWeight: 600 }}>
-                                                        Resposta errada, veja o video explicando o pq.
+                                                        Resposta errada, veja o video explicando o porque.
                                                     </span>
                                                 )}
                                         </div>
@@ -198,11 +184,13 @@ function PopUpPerguntasFase({
 
                                         <button
                                             style={{
-                                                padding: '10px',
+                                                padding: '16px',
                                                 border: 'none',
                                                 borderRadius: '8px',
                                                 color: '#fff',
                                                 background: '#1a8616',
+                                                fontSize: '16px',
+                                                cursor: 'pointer',
                                             }}
                                             onClick={() => setVendoVideo(true)}
                                         >

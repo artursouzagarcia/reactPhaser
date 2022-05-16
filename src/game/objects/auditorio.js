@@ -6,7 +6,7 @@ import storeTooltip from '../../store/StoreTooltip';
 const COLOR_PRIMARY = 0x007bff;
 export default class Auditorio extends Phaser.GameObjects.Image {
     constructor(scene, x, y, player, name, restoObj) {
-        super(scene, x, y, `imgPredio_campus1`);
+        super(scene, x, y, `predio_auditorio`);
         this.X = x;
         this.Y = y;
         this.name = name;

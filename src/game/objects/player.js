@@ -3,6 +3,7 @@ import scorePlayer from '../../store/scorePlayer';
 import soundClick from '../assets/soundfx/mixkit-gate-latch-click-1924.wav';
 import soundFootsteps from '../assets/soundfx/mixkit-crunchy-footsteps-loop-535.wav';
 import StoreAmbienceSound from '../../store/StoreAmbienceSound';
+import PlayerInfos from './playerInfos';
 import { autorun } from 'mobx';
 const VOLUME = 0.1;
 const myAudio2 = new Audio(soundClick);
@@ -23,6 +24,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     createAnimationSet() {
+        // new PlayerInfos(this.scene, this);
         // CRIA OS SETAS DE ANIMAÇÃO
         //CADA SET USA OS SPRITES QUE INFORMAR NOS FRAMES
         //PODE COLOCAR DURATION TB EM MS

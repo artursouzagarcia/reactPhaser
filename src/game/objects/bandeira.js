@@ -105,7 +105,7 @@ export default class Bandeira extends Phaser.GameObjects.Image {
                 scale: { start: 0.07, end: 0 },
                 blendMode: 'ADD',
             });
-            // emitterDiploma.startFollow(diploma);
+
             diploma.visible = false;
             this.diploma = {
                 element: diploma,
@@ -180,5 +180,9 @@ export default class Bandeira extends Phaser.GameObjects.Image {
         this.interactveAula.on('pointerout', function (pointer, item) {
             storeTooltip.togggleTooltip(false);
         });
+
+        if (window.location.origin.includes('localhost')) {
+            this.objAula.desbloqueada = true;
+        }
     }
 }

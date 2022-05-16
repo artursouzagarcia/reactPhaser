@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { MdArrowBack, MdOutlineMusicOff, MdOutlineMusicNote } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import anime from 'animejs';
 
 import Game from '../../../game/index';
 import ScorePlayer from '../../../store/scorePlayer';
@@ -114,6 +115,31 @@ export default observer(() => {
 
     return (
         <>
+            <div
+                id="containerTextoParabens"
+                style={{
+                    position: 'absolute',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    display: 'none',
+                }}
+            >
+                <div
+                    style={{
+                        backgroundColor: '#0091de',
+                        borderRadius: '20px',
+                        border: '4px solid #000',
+                        padding: '20px',
+                        marginTop: '10px',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                >
+                    <img className="avatar" src={Sticker} title="Alguma duvida?" />
+                    <h1 id="textoParabens" style={{ textAlign: 'center', color: '#fff', margin: 0 }}></h1>
+                </div>
+            </div>
             <div className="containerMenu">
                 <ContainerArrowBack>
                     <div title="Voltar" onClick={closeGame}>
@@ -147,7 +173,7 @@ export default observer(() => {
                         title="Quantidade de moedas que voce possui."
                         style={{ background: `url(${elemento_menu})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}
                     >
-                        <img className="iconeScore" src={coin_156} />
+                        <img id="moedaImgScore" className="iconeScore" src={coin_156} />
                         <span className="valueScore" id="ValorMoedas">
                             {ScorePlayer.moedas}
                         </span>
@@ -161,7 +187,7 @@ export default observer(() => {
                             clickAudio.play();
                         }}
                     >
-                        <img className="iconeScore" src={diamante_156} />
+                        <img id="diamanteImgScore" className="iconeScore" src={diamante_156} />
                         <span className="valueScore" id="ValorDiamantes">
                             {ScorePlayer.diamantes.length}
                         </span>
