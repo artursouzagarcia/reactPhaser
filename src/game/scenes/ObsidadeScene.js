@@ -32,6 +32,7 @@ export default class GameScene extends Phaser.Scene {
         this.scoreTextDiamantes = null;
         this.duvidaImage = null;
         this.emitter = null;
+        this.graphics;
     }
 
     preload() {
@@ -42,6 +43,7 @@ export default class GameScene extends Phaser.Scene {
         //FUNCAO CREATE MONTA O JOGO
 
         this.input.on('pointerup', this.handleClickInMap.bind(this));
+        // input.activePointer.leftButton.isDown
         //cria mapa
         this.map = this.make.tilemap({ key: 'map' });
         //CADA LAYER TEM QUE SER CRIADO COMO OBJETO SEPARADO, COM SEUS TILES DE ORIGEM
@@ -60,6 +62,11 @@ export default class GameScene extends Phaser.Scene {
 
         this.player = new Player(this, 130, 1200, 'avatarSprit');
         this.player.scale = 0.8;
+
+        this.graphics = this.scene.add.graphics();
+        this.graphics.fillStyle(0xffffff);
+        this.graphics.fillRect(0, 0, 25, 4);
+
         this.particles = this.add.particles('white');
         this.emitter = this.particles.createEmitter({
             speed: 80,
@@ -110,14 +117,14 @@ export default class GameScene extends Phaser.Scene {
         this.map.currentLayerIndex = 0;
 
         const Predio_campus1 = this.add.image(455, 890, 'imgPredio_campus1');
-        const Predio_campus4 = this.add.image(550, 380, 'imgPredio_campus1');
+        const predio_biblioteca = this.add.image(550, 400, 'predio_biblioteca');
 
         const Predio_auditorio = new Auditorio(this, 995, 690, this.player, 'Auditório');
 
         Predio_campus1.scale = 1.35;
-        Predio_campus4.scale = 1.35;
+        predio_biblioteca.scale = 1.15;
         Predio_campus1.setDepth(25);
-        Predio_campus4.setDepth(25);
+        predio_biblioteca.setDepth(25);
 
         // Place the player above the tile layers
         // this.player.setDepth(10);
@@ -208,6 +215,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     handleClickInMap(pointer) {
+        console.log(pointer);
         let tileClicked = this.map.getTileAtWorldXY(pointer.worldX, pointer.worldY);
         // if (tileClicked.index !== 33) {
         //     return console.log('Clicou fora');
