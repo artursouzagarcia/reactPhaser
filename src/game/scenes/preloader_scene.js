@@ -1,11 +1,14 @@
 import Phaser from 'phaser';
 import camposJson from '../assets/tilemaps/json/campus.json';
+import predio_biblioteca from '../assets/predio_biblioteca.png';
 import tileset_ground_campus from '../assets/tilemaps/tiles/tileset_ground_campus.png';
 import tileset_elements_campus from '../assets/tilemaps/tiles/tileset_elements_campus.png';
+import bibliotecaJson from '../assets/tilemaps/json/campus_indoor.json';
+import tileset_elements_biblioteca from '../assets/tilemaps/tiles/tileset_elements_indoor.png';
+import tileset_ground_biblioteca from '../assets/tilemaps/tiles/tileset_ground_indoor.png';
 import seta_direita from '../assets/seta_direita.png';
 import predio_campus1 from '../assets/predio_campus1.png';
 import predio_campus2 from '../assets/predio_campus2.png';
-import predio_biblioteca from '../assets/predio_biblioteca.png';
 import predio_auditorio from '../assets/predio_auditorio.png';
 import sacodemoedas from '../assets/Sacodemoedas.png';
 import diamante from '../assets/diamante.png';
@@ -18,8 +21,6 @@ import tooltipBG from '../assets/tooltipBG.png';
 import professor_carloslopes from '../assets/professor_carloslopes.png';
 import placa_duvidas from '../assets/placa_duvidas.png';
 import diploma from '../assets/Diploma.png';
-// import bandeiraTeste from '../assets/aula1.png';
-
 import bandeiraD1 from '../assets/aula1.png';
 import bandeiraD2 from '../assets/aula2.png';
 import bandeiraD3 from '../assets/aula3.png';
@@ -35,27 +36,6 @@ import bandeiraD12 from '../assets/aula12.png';
 import bandeiraD13 from '../assets/aula13.png';
 import bandeiraD14 from '../assets/aula14.png';
 import bandeiraD15 from '../assets/aula15.png';
-
-// import bandeiraE1 from '../assets/seta_esquerda1.png';
-// import bandeiraE2 from '../assets/seta_esquerda2.png';
-// import bandeiraE3 from '../assets/seta_esquerda3.png';
-// import bandeiraE4 from '../assets/seta_esquerda4.png';
-// import bandeiraE5 from '../assets/seta_esquerda5.png';
-// import bandeiraE6 from '../assets/seta_esquerda6.png';
-// import bandeiraE7 from '../assets/seta_esquerda7.png';
-// import bandeiraE8 from '../assets/seta_esquerda8.png';
-// import bandeiraE9 from '../assets/seta_esquerda9.png';
-// import bandeiraE10 from '../assets/seta_esquerda10.png';
-// import bandeiraE11 from '../assets/seta_esquerda11.png';
-// import bandeiraE12 from '../assets/seta_esquerda12.png';
-// import bandeiraE13 from '../assets/seta_esquerda13.png';
-// import bandeiraE14 from '../assets/seta_esquerda14.png';
-// import bandeiraE15 from '../assets/seta_esquerda15.png';
-// import bandeiraE16 from '../assets/seta_esquerda16.png';
-// import bandeiraE17 from '../assets/seta_esquerda17.png';
-// import bandeiraE18 from '../assets/seta_esquerda18.png';
-// import bandeiraE19 from '../assets/seta_esquerda19.png';
-// import bandeiraE20 from '../assets/seta_esquerda20.png';
 import cadeadoNew from '../assets/Cadeado.png';
 import cadeadoSprite from '../assets/cadeadoSprite.png';
 import white from '../assets/white.png';
@@ -138,13 +118,19 @@ export default class PreloaderScene extends Phaser.Scene {
 
         //PRE=LOAD CARREGA TODOS OS ASSETS E COLOCA REFERENCIADOS EM ALIAS
 
+        this.load.image('tilesBiblioteca', tileset_ground_biblioteca);
+        this.load.image('tilesElementsBiblioteca', tileset_elements_biblioteca);
+        //CARREGA JSON DO TILEMAP EXPORTADO NO TILED
+        this.load.tilemapTiledJSON('map_biblioteca', bibliotecaJson);
+
         this.load.image('tiles', tileset_ground_campus);
         this.load.image('tilesElements', tileset_elements_campus);
+        //CARREGA JSON DO TILEMAP EXPORTADO NO TILED
+        this.load.tilemapTiledJSON('map', camposJson);
+
         this.load.image('white', white);
         this.load.image('red', red);
 
-        //CARREGA JSON DO TILEMAP EXPORTADO NO TILED
-        this.load.tilemapTiledJSON('map', camposJson);
         this.load.image('imgBandeira', seta_direita);
         this.load.image('imgPredio_campus1', predio_campus1);
         this.load.image('imgPredio_campus2', predio_campus2);
@@ -181,7 +167,6 @@ export default class PreloaderScene extends Phaser.Scene {
 
         this.load.image('cadeadoNew', cadeadoNew);
 
-        // console.log(bandeiraD1, bandeiraD2, bandeiraD3, bandeiraE1, bandeiraE2, bandeiraE3);
         // this.textures.addBase64('bandeiraD1', bandeiraD1);
 
         this.load.image('bandeiraD1', bandeiraD1);
@@ -200,39 +185,16 @@ export default class PreloaderScene extends Phaser.Scene {
         this.load.image('bandeiraD13', bandeiraD13);
         this.load.image('bandeiraD14', bandeiraD14);
         this.load.image('bandeiraD15', bandeiraD15);
-        // this.load.image('bandeiraD16', bandeiraD16);
-        // this.load.image('bandeiraD17', bandeiraD17);
-        // this.load.image('bandeiraD18', bandeiraD18);
-        // this.load.image('bandeiraD19', bandeiraD19);
-        // this.load.image('bandeiraD20', bandeiraD20);
-        // this.load.image('bandeiraE1', bandeiraE1);
-        // this.load.image('bandeiraE2', bandeiraE2);
-        // this.load.image('bandeiraE3', bandeiraE3);
-        // this.load.image('bandeiraE4', bandeiraE4);
-        // this.load.image('bandeiraE5', bandeiraE5);
-        // this.load.image('bandeiraE6', bandeiraE6);
-        // this.load.image('bandeiraE7', bandeiraE7);
-        // this.load.image('bandeiraE8', bandeiraE8);
-        // this.load.image('bandeiraE9', bandeiraE9);
-        // this.load.image('bandeiraE10', bandeiraE10);
-        // this.load.image('bandeiraE11', bandeiraE11);
-        // this.load.image('bandeiraE12', bandeiraE12);
-        // this.load.image('bandeiraE13', bandeiraE13);
-        // this.load.image('bandeiraE14', bandeiraE14);
-        // this.load.image('bandeiraE15', bandeiraE15);
-        // this.load.image('bandeiraE16', bandeiraE16);
-        // this.load.image('bandeiraE17', bandeiraE17);
-        // this.load.image('bandeiraE18', bandeiraE18);
-        // this.load.image('bandeiraE19', bandeiraE19);
-        // this.load.image('bandeiraE20', bandeiraE20);
     }
 
     ready() {
-        this.scene.start('ObsidadeScene');
+        this.scene.start('BibliotecaScene');
+        // this.scene.start('ObsidadeScene');
 
         this.readyCount += 1;
         if (this.readyCount === 2) {
-            this.scene.start('ObsidadeScene');
+            this.scene.start('BibliotecaScene');
+            // this.scene.start('ObsidadeScene');
         }
     }
 }

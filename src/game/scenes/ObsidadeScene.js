@@ -32,7 +32,7 @@ export default class GameScene extends Phaser.Scene {
         this.scoreTextDiamantes = null;
         this.duvidaImage = null;
         this.emitter = null;
-        this.graphics;
+        this.graphics = null;
     }
 
     preload() {
@@ -55,6 +55,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.layer = this.map.createLayer('Ground', this.tiles, 0, 0);
         this.layerElements2 = this.map.createLayer('Elementos2', this.tilesElements, 0, 0);
+        console.log(this.tilesElements, this.tiles);
         this.layerElements1 = this.map.createLayer('Elementos1', this.tilesElements, 0, 0);
         this.layerElements = this.map.createLayer('Elementos', this.tilesElements, 0, 0);
         // this.layerElements2.setDepth(27);
@@ -63,9 +64,9 @@ export default class GameScene extends Phaser.Scene {
         this.player = new Player(this, 130, 1200, 'avatarSprit');
         this.player.scale = 0.8;
 
-        this.graphics = this.scene.add.graphics();
-        this.graphics.fillStyle(0xffffff);
-        this.graphics.fillRect(0, 0, 25, 4);
+        // this.graphics = this.scene.add.graphics();
+        // this.graphics.fillStyle(0xffffff);
+        // this.graphics.fillRect(0, 0, 25, 4);
 
         this.particles = this.add.particles('white');
         this.emitter = this.particles.createEmitter({
@@ -111,6 +112,7 @@ export default class GameScene extends Phaser.Scene {
                 this.Bandeiras.push(bandeira);
             }
         }
+
         this.Bandeiras.forEach((Bandeiras) => (Bandeiras.scale = 0.6));
         // console.log(this.Bandeiras);
 
@@ -118,6 +120,10 @@ export default class GameScene extends Phaser.Scene {
 
         const Predio_campus1 = this.add.image(455, 890, 'imgPredio_campus1');
         const predio_biblioteca = this.add.image(550, 400, 'predio_biblioteca');
+        //    const interativeBiblio =  predio_biblioteca.setInteractive.
+        predio_biblioteca.setInteractive().on('pointerup', () => {
+            this.scene.start('BibliotecaScene');
+        });
 
         const Predio_auditorio = new Auditorio(this, 995, 690, this.player, 'Auditório');
 

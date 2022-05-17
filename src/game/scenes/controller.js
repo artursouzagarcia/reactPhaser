@@ -6,6 +6,7 @@ import UI from './ui';
 import logo from '../assets/logo.png';
 
 import ObsidadeScene from './ObsidadeScene';
+import BibliotecaScene from './bibliotecaScene';
 
 export default class Controller extends Phaser.Scene {
     constructor() {
@@ -22,6 +23,7 @@ export default class Controller extends Phaser.Scene {
         this.scene.add('Preloader', PreloaderScene);
         // this.scene.add('Title', TitleScene);
         this.scene.add('ObsidadeScene', ObsidadeScene);
+        this.scene.add('BibliotecaScene', BibliotecaScene);
         this.scene.add('ui', UI);
         this.scene.start('Preloader');
     }

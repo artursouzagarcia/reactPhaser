@@ -174,7 +174,7 @@ export default class Bandeira extends Phaser.GameObjects.Image {
             const posX = window.event.clientX;
             const posY = window.event.clientY;
             storeTooltip.togggleTooltip(true, posX, posY, this.name, `Aula ${this.objAula.ordem}:`);
-            console.log(this, posX, posY);
+            // console.log(this, posX, posY);
         });
 
         this.interactveAula.on('pointerout', function (pointer, item) {

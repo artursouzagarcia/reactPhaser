@@ -49,7 +49,6 @@ export default class Auditorio extends Phaser.GameObjects.Image {
             const posX = window.event.clientX;
             const posY = window.event.clientY;
             storeTooltip.togggleTooltip(true, posX, posY, `Aqui voce podera ver as lives referente a este curso.`, this.name);
-            console.log(this, posX, posY);
         });
 
         this.interactveAula.on('pointerout', function (pointer, item) {
