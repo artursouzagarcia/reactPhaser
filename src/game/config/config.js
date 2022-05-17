@@ -13,7 +13,7 @@ export default {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: false, //window.location.origin.includes('localhost') ? true : false,
+            debug: window.location.origin.includes('localhost') ? true : false,
         },
     },
 

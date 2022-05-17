@@ -55,7 +55,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.layer = this.map.createLayer('Ground', this.tiles, 0, 0);
         this.layerElements2 = this.map.createLayer('Elementos2', this.tilesElements, 0, 0);
-        console.log(this.tilesElements, this.tiles);
+
         this.layerElements1 = this.map.createLayer('Elementos1', this.tilesElements, 0, 0);
         this.layerElements = this.map.createLayer('Elementos', this.tilesElements, 0, 0);
         // this.layerElements2.setDepth(27);
