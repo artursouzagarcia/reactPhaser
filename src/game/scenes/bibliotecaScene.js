@@ -26,32 +26,38 @@ export default class BibliotecaScene extends Phaser.Scene {
         // this.tilesElements = this.map.addTilesetImage('tiles_elements_biblioteca', 'tilesElementsBiblioteca');
         // this.tiles = this.map.addTilesetImage('tileset_ground_biblioteca', 'tilesBiblioteca');
 
+        this.tiles = this.map.addTilesetImage('layer_indoor', 'tilesGroundBiblioteca');
+        this.tilesJanelas = this.map.addTilesetImage('janelas', 'tilesJanelaBiblioteca');
         this.tilesElements = this.map.addTilesetImage('Elementos_indoor', 'tilesElementsBiblioteca');
-        this.tiles = this.map.addTilesetImage('indoor', 'tilesBiblioteca');
 
+        this.layer = this.map.createLayer('layer_indoor', this.tiles, 0, 0);
         this.layerElements = this.map.createLayer('Elementos', this.tilesElements, 0, 0);
-        this.layer = this.map.createLayer('Geral', this.tiles, 0, 0);
+        this.layerJanelas = this.map.createLayer('Elementos1', this.tilesJanelas, 0, 0);
+        this.layerElements2 = this.map.createLayer('Elementos2', this.tilesElements, 0, 0);
 
         this.map.currentLayerIndex = 0;
         this.camera.setBounds(0, 0, this.map.width * 32, this.map.height * 32);
 
         this.player = new Player(this, 320, 290, 'avatarSprit');
-
         this.player.scale = 0.8;
-
         this.camera.startFollow(this.player); //SEGUE O JOGADOR
 
-        this.circulo = this.add.rectangle(220, 260, 50, 80);
-        // this.physics.add.existing(this.circulo);
-        this.physics.world.enableBody(this.circulo, 0);
+        this.retanguloPorta = this.add.rectangle(220, 260, 50, 80);
+        this.retanguloPorta.setInteractive().on('pointerup', () => {
+            const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
+            this.findPathAndMove(PlayerX, PlayerY, 7, 9, () => {});
+        });
+        // this.physics.add.existing(this.retanguloPorta);
+        this.physics.world.enableBody(this.retanguloPorta, 0);
 
-        this.physics.add.collider(this.player, this.layerElements);
-        this.physics.add.collider(this.player, this.circulo, () => this.scene.start('ObsidadeScene'));
+        // this.physics.add.collider(this.player, this.layerElements);
+        this.physics.add.collider(this.player, this.retanguloPorta, () => this.scene.start('ObsidadeScene'));
         this.configPathFinder();
 
-        this.circulo.setDepth(25);
-        this.layer.setDepth(0);
-        this.layerElements.setDepth(15); // layer primeira arvore
+        this.retanguloPorta.setDepth(25);
+        // this.layer.setDepth(0);
+        // this.layerJanelas.setDepth(10);
+        // this.layerElements.setDepth(15); // layer primeira arvore
         this.player.setDepth(25);
 
         setTimeout(() => {
@@ -133,6 +139,7 @@ export default class BibliotecaScene extends Phaser.Scene {
                 return console.error('Path was not found.');
             } else {
                 // this.moveCharacter(path);
+                console.log(toX, toY);
                 this.player.move(path, this.map, acaoDepoisDeAndar);
             }
         });

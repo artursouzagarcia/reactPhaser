@@ -6,6 +6,7 @@ import tileset_elements_campus from '../assets/tilemaps/tiles/tileset_elements_c
 import bibliotecaJson from '../assets/tilemaps/json/campus_indoor.json';
 import tileset_elements_biblioteca from '../assets/tilemaps/tiles/tileset_elements_indoor.png';
 import tileset_ground_biblioteca from '../assets/tilemaps/tiles/tileset_ground_indoor.png';
+import janelaElementes from '../assets/tilemaps/tiles/janelas.png';
 import seta_direita from '../assets/seta_direita.png';
 import predio_campus1 from '../assets/predio_campus1.png';
 import predio_campus2 from '../assets/predio_campus2.png';
@@ -118,8 +119,9 @@ export default class PreloaderScene extends Phaser.Scene {
 
         //PRE=LOAD CARREGA TODOS OS ASSETS E COLOCA REFERENCIADOS EM ALIAS
 
-        this.load.image('tilesBiblioteca', tileset_ground_biblioteca);
+        this.load.image('tilesGroundBiblioteca', tileset_ground_biblioteca);
         this.load.image('tilesElementsBiblioteca', tileset_elements_biblioteca);
+        this.load.image('tilesJanelaBiblioteca', janelaElementes);
         //CARREGA JSON DO TILEMAP EXPORTADO NO TILED
         this.load.tilemapTiledJSON('map_biblioteca', bibliotecaJson);
 
@@ -188,13 +190,13 @@ export default class PreloaderScene extends Phaser.Scene {
     }
 
     ready() {
-        // this.scene.start('BibliotecaScene');
-        this.scene.start('ObsidadeScene');
+        this.scene.start('BibliotecaScene');
+        // this.scene.start('ObsidadeScene');
 
         this.readyCount += 1;
         if (this.readyCount === 2) {
-            // this.scene.start('BibliotecaScene');
-            this.scene.start('ObsidadeScene');
+            this.scene.start('BibliotecaScene');
+            // this.scene.start('ObsidadeScene');
         }
     }
 }

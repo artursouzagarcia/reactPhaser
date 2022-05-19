@@ -7,8 +7,6 @@ import PhaserTooltip, { addTooltip } from '../components/tooltips';
 import aulasMOKE from '../../store/mokeAula';
 
 const COLOR_PRIMARY = 0x007bff;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
 
 const CreateDOM = function (scene, content) {
     var dom = scene.add.dom().createFromHTML(content);
@@ -61,7 +59,7 @@ export default class GameScene extends Phaser.Scene {
         // this.layerElements2.setDepth(27);
         // this.layerElements1.setDepth(26);
 
-        this.player = new Player(this, 130, 1200, 'avatarSprit');
+        this.player = new Player(this, 150, 1200, 'avatarSprit');
         this.player.scale = 0.8;
 
         // this.graphics = this.scene.add.graphics();
@@ -122,7 +120,9 @@ export default class GameScene extends Phaser.Scene {
         const predio_biblioteca = this.add.image(550, 400, 'predio_biblioteca');
         //    const interativeBiblio =  predio_biblioteca.setInteractive.
         predio_biblioteca.setInteractive().on('pointerup', () => {
-            this.scene.start('BibliotecaScene');
+            const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
+            // this.findPathAndMove(PlayerX, PlayerY, 17, 19, () => console.log('Oi'));
+            this.findPathAndMove(PlayerX, PlayerY, 17, 19, () => this.scene.start('BibliotecaScene'));
         });
 
         const Predio_auditorio = new Auditorio(this, 995, 690, this.player, 'Auditório');
@@ -156,7 +156,7 @@ export default class GameScene extends Phaser.Scene {
         this.camera.setBounds(0, 0, this.map.width * 32, this.map.height * 32);
         this.camera.startFollow(this.player); //SEGUE O JOGADOR
 
-        this.physics.add.collider(this.player, this.layer);
+        // this.physics.add.collider(this.player, this.layer);
         this.configPathFinder();
 
         this.layer.setDepth(0);
