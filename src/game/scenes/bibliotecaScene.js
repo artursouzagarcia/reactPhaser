@@ -45,13 +45,13 @@ export default class BibliotecaScene extends Phaser.Scene {
         this.retanguloPorta = this.add.rectangle(220, 260, 50, 80);
         this.retanguloPorta.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
-            this.findPathAndMove(PlayerX, PlayerY, 7, 9, () => {});
+            this.findPathAndMove(PlayerX, PlayerY, 7, 9, () => this.scene.start('ObsidadeScene'));
         });
         // this.physics.add.existing(this.retanguloPorta);
         this.physics.world.enableBody(this.retanguloPorta, 0);
 
         // this.physics.add.collider(this.player, this.layerElements);
-        this.physics.add.collider(this.player, this.retanguloPorta, () => this.scene.start('ObsidadeScene'));
+        // this.physics.add.collider(this.player, this.retanguloPorta, () => this.scene.start('ObsidadeScene'));
         this.configPathFinder();
 
         this.retanguloPorta.setDepth(25);
