@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import EasyStar from 'easystarjs';
 import Player from '../objects/player';
+import storePopUps from '../../store/StorePopUps';
 
 export default class BibliotecaScene extends Phaser.Scene {
     constructor(scene) {
@@ -31,9 +32,9 @@ export default class BibliotecaScene extends Phaser.Scene {
         this.tilesElements = this.map.addTilesetImage('Elementos_indoor', 'tilesElementsBiblioteca');
 
         this.layer = this.map.createLayer('layer_indoor', this.tiles, 0, 0);
-        this.layerElements = this.map.createLayer('Elementos', this.tilesElements, 0, 0);
-        this.layerJanelas = this.map.createLayer('Elementos1', this.tilesJanelas, 0, 0);
-        this.layerElements2 = this.map.createLayer('Elementos2', this.tilesElements, 0, 0);
+        this.layerElements = this.map.createLayer('Elementos_indoor', this.tilesElements, 0, 0);
+        this.layerJanelas = this.map.createLayer('Janelas', this.tilesJanelas, 0, 0);
+        // this.layerElements2 = this.map.createLayer('Elementos2', this.tilesElements, 0, 0);
 
         this.map.currentLayerIndex = 0;
         this.camera.setBounds(0, 0, this.map.width * 32, this.map.height * 32);
@@ -42,13 +43,38 @@ export default class BibliotecaScene extends Phaser.Scene {
         this.player.scale = 0.8;
         this.camera.startFollow(this.player); //SEGUE O JOGADOR
 
-        this.retanguloPorta = this.add.rectangle(220, 260, 50, 80);
+        this.retanguloPorta = this.add.rectangle(210, 250, 90, 130);
         this.retanguloPorta.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
             this.findPathAndMove(PlayerX, PlayerY, 7, 9, () => this.scene.start('ObsidadeScene'));
         });
+
+        this.retanguloBibliografia = this.add.rectangle(1080, 240, 170, 130);
+        this.retanguloBibliografia.setInteractive().on('pointerup', () => {
+            const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
+            this.findPathAndMove(PlayerX, PlayerY, 34, 10, () => storePopUps.openOnePopUp('bibliografia'));
+        });
+        this.retanguloBibliografia.rotation = -0.16;
+
+        this.retanguloLivros = this.add.rectangle(1250, 210, 170, 130);
+        this.retanguloLivros.setInteractive().on('pointerup', () => {
+            const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
+            this.findPathAndMove(PlayerX, PlayerY, 41, 8, () => storePopUps.openOnePopUp('livros'));
+        });
+        this.retanguloLivros.rotation = -0.16;
+
+        this.retanguloLinks = this.add.rectangle(440, 190, 70, 140);
+        this.retanguloLinks.setInteractive().on('pointerup', () => {
+            const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
+            this.findPathAndMove(PlayerX, PlayerY, 16, 8, () => storePopUps.openOnePopUp('links'));
+        });
+        this.retanguloLinks.rotation = -0.1;
+
         // this.physics.add.existing(this.retanguloPorta);
         this.physics.world.enableBody(this.retanguloPorta, 0);
+        this.physics.world.enableBody(this.retanguloBibliografia, 0);
+        this.physics.world.enableBody(this.retanguloLivros, 0);
+        this.physics.world.enableBody(this.retanguloLinks, 0);
 
         // this.physics.add.collider(this.player, this.layerElements);
         // this.physics.add.collider(this.player, this.retanguloPorta, () => this.scene.start('ObsidadeScene'));
@@ -65,6 +91,7 @@ export default class BibliotecaScene extends Phaser.Scene {
             this.findPathAndMove(PlayerX, PlayerY, 12, 10);
         }, 200);
     }
+
     update() {
         // this.physics.add.collider(this.player, this.layerElements);
         // this.physics.add.collider(this.player, this.circulo);
