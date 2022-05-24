@@ -32,6 +32,10 @@ import PopUpPerguntasFase from '../../../components/popUps/PopUpPerguntasFase';
 import PopUpPerguntaEnviada from '../../../components/popUps/popUpPerguntaEnviada';
 import PopUpListPDFs from '../../../components/popUps/popUpListPDFs';
 import PopUpAuditorio from '../../../components/popUps/popUpAuditorio';
+import PopUpBibliografia from '../../../components/popUps/popUpBibliografia';
+import PopUpLinks from '../../../components/popUps/popUpLinks';
+import PopUpLivros from '../../../components/popUps/popUpLivros';
+
 import graduation from '../../../components/animacoes/87227-graduation.gif';
 import soundError from '../../../game/assets/soundfx/mixkit-click-error-1110.wav';
 import soundAmbience from '../../../game/assets/soundfx/mixkit-forest-birds-ambience-1210.wav';
@@ -140,6 +144,7 @@ export default observer(() => {
                     <h1 id="textoParabens" style={{ textAlign: 'center', color: '#fff', margin: 0 }}></h1>
                 </div>
             </div>
+
             <div className="containerMenu">
                 <ContainerArrowBack>
                     <div title="Voltar" onClick={closeGame}>
@@ -220,6 +225,16 @@ export default observer(() => {
 
             {storePopUps.popups.auditorio && (
                 <PopUpAuditorio closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
+            )}
+
+            {storePopUps.popups.bibliografia && (
+                <PopUpBibliografia closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
+            )}
+            {storePopUps.popups.livros && (
+                <PopUpLivros closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
+            )}
+            {storePopUps.popups.links && (
+                <PopUpLinks closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
             )}
 
             {jornadaSelecionada && storeJornada.popUpVideoAulaAberto && (

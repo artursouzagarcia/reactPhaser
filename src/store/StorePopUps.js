@@ -7,6 +7,9 @@ class StorePopUps {
         leitoPDF: false,
         referencias: false,
         auditorio: false,
+        bibliografia: false,
+        livros: false,
+        links: false,
     };
 
     constructor() {

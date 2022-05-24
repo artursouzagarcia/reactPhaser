@@ -190,13 +190,13 @@ export default class PreloaderScene extends Phaser.Scene {
     }
 
     ready() {
-        this.scene.start('BibliotecaScene');
-        // this.scene.start('ObsidadeScene');
+        // this.scene.start('BibliotecaScene');
+        this.scene.start('ObsidadeScene');
 
         this.readyCount += 1;
         if (this.readyCount === 2) {
-            this.scene.start('BibliotecaScene');
-            // this.scene.start('ObsidadeScene');
+            // this.scene.start('BibliotecaScene');
+            this.scene.start('ObsidadeScene');
         }
     }
 }
