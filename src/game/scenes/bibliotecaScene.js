@@ -43,27 +43,51 @@ export default class BibliotecaScene extends Phaser.Scene {
         this.player.scale = 0.8;
         this.camera.startFollow(this.player); //SEGUE O JOGADOR
 
-        this.retanguloPorta = this.add.rectangle(210, 250, 90, 130);
+        this.retanguloPorta = this.add.rectangle(
+            210,
+            250,
+            90,
+            130,
+            window.location.origin.includes('localhost') ? 0xcecece : 0xcecece00,
+        );
         this.retanguloPorta.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
             this.findPathAndMove(PlayerX, PlayerY, 7, 9, () => this.scene.start('ObsidadeScene'));
         });
 
-        this.retanguloBibliografia = this.add.rectangle(1080, 240, 170, 130);
+        this.retanguloBibliografia = this.add.rectangle(
+            1080,
+            240,
+            170,
+            130,
+            window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
+        );
         this.retanguloBibliografia.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
             this.findPathAndMove(PlayerX, PlayerY, 34, 10, () => storePopUps.openOnePopUp('bibliografia'));
         });
         this.retanguloBibliografia.rotation = -0.16;
 
-        this.retanguloLivros = this.add.rectangle(1250, 210, 170, 130);
+        this.retanguloLivros = this.add.rectangle(
+            1250,
+            210,
+            170,
+            130,
+            window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
+        );
         this.retanguloLivros.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
             this.findPathAndMove(PlayerX, PlayerY, 41, 8, () => storePopUps.openOnePopUp('livros'));
         });
         this.retanguloLivros.rotation = -0.16;
 
-        this.retanguloLinks = this.add.rectangle(440, 190, 70, 140);
+        this.retanguloLinks = this.add.rectangle(
+            440,
+            190,
+            70,
+            140,
+            window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
+        );
         this.retanguloLinks.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
             this.findPathAndMove(PlayerX, PlayerY, 16, 8, () => storePopUps.openOnePopUp('links'));
