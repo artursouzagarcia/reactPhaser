@@ -35,22 +35,27 @@ import PopUpAuditorio from '../../../components/popUps/popUpAuditorio';
 import PopUpBibliografia from '../../../components/popUps/popUpBibliografia';
 import PopUpLinks from '../../../components/popUps/popUpLinks';
 import PopUpLivros from '../../../components/popUps/popUpLivros';
+import PopUpHelp from '../../../components/popUps/popUpHelp';
 
-import graduation from '../../../components/animacoes/87227-graduation.gif';
+// import graduation from '../../../components/animacoes/87227-graduation.gif';
 import soundError from '../../../game/assets/soundfx/mixkit-click-error-1110.wav';
 import soundAmbience from '../../../game/assets/soundfx/mixkit-forest-birds-ambience-1210.wav';
 import soundClick from '../../../game/assets/soundfx/mixkit-gate-latch-click-1924.wav';
+import gifBoasVindas from '../../../game/assets/Pergaminho-abrindo.gif';
+
 const clickAudio = new Audio(soundClick);
 const ambienceAudio = new Audio(soundAmbience);
 const errorAudio = new Audio(soundError);
 const VOLUME_AMBIENCE = 0.02;
 ambienceAudio.volume = VOLUME_AMBIENCE;
 errorAudio.volume = 0.1;
+const TEMPIDCURSO = 142;
 
 export default observer(() => {
     const navegate = useNavigate();
     const [game, setGame] = useState(null);
     const [objJornada, setObjJornada] = useState(aulasMOKE);
+    const [boasVindas, setBoasVindas] = useState(false);
 
     const jornadaSelecionada = useMemo(() => {
         if (!objJornada.length || !storeJornada.idAulaSelecionada) return null;
@@ -69,6 +74,14 @@ export default observer(() => {
             setGame(new Game());
 
             playAmbienceAudio();
+            const boasVindas = localStorage.getItem(`boasVindas-${TEMPIDCURSO}`);
+            if (!boasVindas) {
+                setBoasVindas(true);
+                setTimeout(() => {
+                    localStorage.setItem(`boasVindas-${TEMPIDCURSO}`, 'true');
+                    setBoasVindas(false);
+                }, 1000);
+            }
         }
 
         return () => ambienceAudio.pause();
@@ -117,6 +130,10 @@ export default observer(() => {
         navegate(-1);
     }
 
+    function openHelp() {
+        storePopUps.openOnePopUp('help');
+    }
+
     return (
         <>
             <div
@@ -147,7 +164,10 @@ export default observer(() => {
 
             <div className="containerMenu">
                 <ContainerArrowBack>
-                    <div title="Voltar" onClick={closeGame}>
+                    {/* <div title="Voltar" onClick={closeGame}>
+                        <MdArrowBack />
+                    </div> */}
+                    <div title="Voltar" onClick={openHelp}>
                         <MdArrowBack />
                     </div>
                     <div title="Voltar" onClick={toogleAmbienceAudioActive}>
@@ -237,6 +257,10 @@ export default observer(() => {
                 <PopUpLinks closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
             )}
 
+            {storePopUps.popups.help && (
+                <PopUpHelp closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
+            )}
+
             {jornadaSelecionada && storeJornada.popUpVideoAulaAberto && (
                 <PopUpVideo objAulaSelecionada={jornadaSelecionada} pauseAmbiente={ambienceAudio} />
             )}
@@ -291,6 +315,21 @@ export default observer(() => {
                         <span style={{ fontWeight: 600 }}>{storeTooltip.title}</span>
                         <span>{storeTooltip.texto}</span>
                     </div>
+                </div>
+            )}
+
+            {boasVindas && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <img src={gifBoasVindas} style={{ width: '50%' }} />
                 </div>
             )}
         </>
