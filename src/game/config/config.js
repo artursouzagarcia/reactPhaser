@@ -12,8 +12,8 @@ export default {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 0 },
-            debug: window.location.origin.includes('localhost') ? true : false,
+            gravity: { y: 0, x: 0 },
+            debug: window.location.origin.includes('localhost') ? false : false,
         },
     },
 
