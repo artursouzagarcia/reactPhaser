@@ -42,22 +42,23 @@ const PopUpListPDFs = ({ closePopUp, diamantesPegos }) => {
                                                 setPdfSelecionado(diamante);
                                             }}
                                         >
+                                            <div style={{ width: '50px' }}>
+                                                <img style={{ width: '100%' }} src={imgDiamante} />
+                                            </div>
                                             <button
                                                 style={{
                                                     background: '#2dae32',
                                                     color: '#fff',
-                                                    marginRight: '10px',
+                                                    marginLeft: '10px',
                                                     border: 'none',
                                                     borderRadius: '8px',
                                                     padding: '0px 10px',
                                                     height: '40px',
+                                                    cursor: 'pointer',
                                                 }}
                                             >
                                                 Abrir Diamante
                                             </button>
-                                            <div style={{ width: '50px' }}>
-                                                <img style={{ width: '100%' }} src={imgDiamante} />
-                                            </div>
                                             <span style={{ fontSize: '20px', color: '#fff', lineHeight: '50px' }}>
                                                 {diamante.descricao}
                                             </span>

@@ -10,6 +10,7 @@ class StorePopUps {
         bibliografia: false,
         livros: false,
         links: false,
+        help: false,
     };
 
     constructor() {

@@ -40,8 +40,8 @@ export const Container = styled.div`
 
     > .contentPopUp > .close {
         position: absolute;
-        top: -32px;
-        right: -32px;
+        top: -35px;
+        right: -2px;
         width: 64px;
         height: 64px;
         cursor: pointer;
