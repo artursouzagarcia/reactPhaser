@@ -13,6 +13,7 @@ export default class Auditorio extends Phaser.GameObjects.Image {
         this.player = player;
         this.scene.add.existing(this);
         this.interactveAula = this.setInteractive();
+        this.retanguloAjusteClick = null;
         this.scene.physics.world.enableBody(this, 0);
         this.objAula = { name, ...restoObj };
 
@@ -37,13 +38,30 @@ export default class Auditorio extends Phaser.GameObjects.Image {
     _init() {
         this.setDepth(25);
         this.scale = 1.15;
-        this.interactveAula.on('pointerup', () => {
+        this.retanguloAjusteClick = this.scene.add.rectangle(
+            980,
+            725,
+            200,
+            230,
+            // window.location.origin.includes('localhost') ? 0xff0000 : 0xffffff00,
+        );
+
+        this.retanguloAjusteClick.setDepth(30);
+        this.retanguloAjusteClick.setInteractive().on('pointerup', () => {
             //CLICANDO NO OBJETO MANDO  ELE PARA LÁ NAS COORDANADAS ESPECIFICAS
             //A BIBLIOTECA STAR CALCULA O TRAJETO EM TILES, POR ISSO AS COORDENADAS SÃO DIVIDAS PELO TILESIZE
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
             console.log('Posicao player bandeira', 30, 28);
             this.scene.findPathAndMove(PlayerX, PlayerY, 30, 28, this.openPopUp.bind(this));
         });
+
+        // this.interactveAula.on('pointerup', () => {
+        //     //CLICANDO NO OBJETO MANDO  ELE PARA LÁ NAS COORDANADAS ESPECIFICAS
+        //     //A BIBLIOTECA STAR CALCULA O TRAJETO EM TILES, POR ISSO AS COORDENADAS SÃO DIVIDAS PELO TILESIZE
+        //     const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
+        //     console.log('Posicao player bandeira', 30, 28);
+        //     this.scene.findPathAndMove(PlayerX, PlayerY, 30, 28, this.openPopUp.bind(this));
+        // });
 
         this.interactveAula.on('pointerover', function (pointer, item) {
             const posX = window.event.clientX;
