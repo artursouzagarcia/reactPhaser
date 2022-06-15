@@ -11,7 +11,7 @@ export const ContainerArrowBack = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 10px;
+        padding: 7px;
         border-radius: 50%;
         background-color: #ffffff9e;
         cursor: pointer;

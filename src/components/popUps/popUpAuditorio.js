@@ -78,7 +78,15 @@ const PopUpAuditorio = ({ closePopUp, pauseAmbiente }) => {
                 </div>
                 <div className="conteudoPopUp">
                     {/* <h1>Auditório</h1> */}
-                    <div style={{ flex: 1, display: 'flex', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div
+                        style={{
+                            flex: 1,
+                            display: 'flex',
+                            borderBottomLeftRadius: '8px',
+                            borderBottomRightRadius: '8px',
+                            overflow: 'hidden',
+                        }}
+                    >
                         <div style={{ flex: 1, position: 'relative' }}>
                             <VideoPlayer idVideo={'ec5e5f468b3b3f82ae75147374f56c0e'} pauseAmbiente={pauseAmbiente} />
                             {!chatAberto && (

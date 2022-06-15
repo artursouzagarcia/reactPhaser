@@ -3,6 +3,7 @@ import scorePlayer from '../../store/scorePlayer';
 import soundClick from '../assets/soundfx/mixkit-gate-latch-click-1924.wav';
 import soundFootsteps from '../assets/soundfx/mixkit-crunchy-footsteps-loop-535.wav';
 import StoreAmbienceSound from '../../store/StoreAmbienceSound';
+import isFunction from '../../utils/isFunction';
 // import PlayerInfos from './playerInfos';
 import { autorun } from 'mobx';
 const VOLUME = 0.1;
@@ -86,6 +87,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     move(path, map, acaoDepoisDeAndar) {
         myAudio2.play();
+        if (Array.isArray(path) && path.length === 0) {
+            if (acaoDepoisDeAndar && isFunction(acaoDepoisDeAndar)) return acaoDepoisDeAndar();
+        }
+
         //FUNC QUE CRIA TIMELINE DE TWEENS QUE SÃO ALTERAÇÕES SEQUENCIAIS DE PROPS DE UM OBJETO
         // Sets up a list of tweens, one for each tile to walk, that will be chained by the timeline
         if (this.timeline) {
@@ -100,7 +105,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
                 x: { value: ex * map.tileWidth, duration: window.location.origin.includes('localhost') ? 10 : 100 },
                 y: { value: ey * map.tileHeight, duration: window.location.origin.includes('localhost') ? 10 : 100 },
                 onComplete: (e) => {
-                    // console.log(e);
                     const eixoX = e.data[0];
                     const eixoY = e.data[1];
 
@@ -138,11 +142,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
         //FUNCAO DEFINIDA QUANDO A SEQUENCIA É ENCERRADA
         this.timeline.on('complete', (a, b) => {
             this.play('idle');
-            if (acaoDepoisDeAndar)
+            if (acaoDepoisDeAndar && isFunction(acaoDepoisDeAndar)) {
                 setTimeout(() => {
                     acaoDepoisDeAndar();
                     this.timeline = null;
                 }, 400);
+            }
         });
     }
 

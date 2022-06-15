@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { MdArrowBack, MdOutlineMusicOff, MdOutlineMusicNote } from 'react-icons/md';
+import { IoMdHelp } from 'react-icons/io';
 import { toast } from 'react-toastify';
 import anime from 'animejs';
 
@@ -36,6 +37,7 @@ import PopUpBibliografia from '../../../components/popUps/popUpBibliografia';
 import PopUpLinks from '../../../components/popUps/popUpLinks';
 import PopUpLivros from '../../../components/popUps/popUpLivros';
 import PopUpHelp from '../../../components/popUps/popUpHelp';
+import PopUpSatisfacao from '../../../components/popUps/PopUpSatisfacao';
 
 // import graduation from '../../../components/animacoes/87227-graduation.gif';
 import soundError from '../../../game/assets/soundfx/mixkit-click-error-1110.wav';
@@ -51,11 +53,14 @@ ambienceAudio.volume = VOLUME_AMBIENCE;
 errorAudio.volume = 0.1;
 const TEMPIDCURSO = 142;
 
+const CINCO_MIN = 180000; //300000;
+
 export default observer(() => {
     const navegate = useNavigate();
     const [game, setGame] = useState(null);
     const [objJornada, setObjJornada] = useState(aulasMOKE);
     const [boasVindas, setBoasVindas] = useState(false);
+    const [satisfacao, setSatisfacao] = useState(false);
 
     const jornadaSelecionada = useMemo(() => {
         if (!objJornada.length || !storeJornada.idAulaSelecionada) return null;
@@ -75,12 +80,22 @@ export default observer(() => {
 
             playAmbienceAudio();
             const boasVindas = localStorage.getItem(`boasVindas-${TEMPIDCURSO}`);
+            const satisfacao = localStorage.getItem(`satisfacao-${TEMPIDCURSO}`);
+
             if (!boasVindas) {
                 setBoasVindas(true);
                 setTimeout(() => {
                     localStorage.setItem(`boasVindas-${TEMPIDCURSO}`, 'true');
                     setBoasVindas(false);
                 }, 1000);
+            }
+
+            if (!satisfacao) {
+                setSatisfacao(true);
+                setTimeout(() => {
+                    localStorage.setItem(`satisfacao-${TEMPIDCURSO}`, 'true');
+                    setSatisfacao(false);
+                }, CINCO_MIN);
             }
         }
 
@@ -164,14 +179,14 @@ export default observer(() => {
 
             <div className="containerMenu">
                 <ContainerArrowBack>
-                    {/* <div title="Voltar" onClick={closeGame}>
-                        <MdArrowBack />
-                    </div> */}
-                    <div title="Voltar" onClick={openHelp}>
+                    <div title="Voltar" onClick={closeGame}>
                         <MdArrowBack />
                     </div>
-                    <div title="Voltar" onClick={toogleAmbienceAudioActive}>
+                    <div title="Mutar" onClick={toogleAmbienceAudioActive}>
                         {storeAmbienceSound.isPlaying ? <MdOutlineMusicNote /> : <MdOutlineMusicOff />}
+                    </div>
+                    <div title="Help" onClick={openHelp}>
+                        <IoMdHelp />
                     </div>
                 </ContainerArrowBack>
 
@@ -186,7 +201,7 @@ export default observer(() => {
                         marginRight: '20px',
                     }}
                 >
-                    <img className="avatar" src={selfie} style={{ height: '60px' }} />
+                    <img className="avatar" src={selfie} style={{ height: '80px' }} />
                 </div>
                 <div className="containerMenuScore">
                     <div
@@ -250,9 +265,11 @@ export default observer(() => {
             {storePopUps.popups.bibliografia && (
                 <PopUpBibliografia closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
             )}
+
             {storePopUps.popups.livros && (
                 <PopUpLivros closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
             )}
+
             {storePopUps.popups.links && (
                 <PopUpLinks closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
             )}
@@ -264,6 +281,8 @@ export default observer(() => {
             {jornadaSelecionada && storeJornada.popUpVideoAulaAberto && (
                 <PopUpVideo objAulaSelecionada={jornadaSelecionada} pauseAmbiente={ambienceAudio} />
             )}
+
+            {satisfacao && <PopUpSatisfacao closePopUp={() => setSatisfacao(false)} pauseAmbiente={ambienceAudio} />}
 
             {casoClinicoSelecionado && storeCasoClinico.popUpVideoAulaAberto && (
                 <PopUpPerguntasFase

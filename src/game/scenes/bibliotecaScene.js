@@ -48,7 +48,7 @@ export default class BibliotecaScene extends Phaser.Scene {
             250,
             90,
             130,
-            window.location.origin.includes('localhost') ? 0xcecece : 0xcecece00,
+            //window.location.origin.includes('localhost') ? 0xcecece : 0xcecece00,
         );
         this.retanguloPorta.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
@@ -60,7 +60,7 @@ export default class BibliotecaScene extends Phaser.Scene {
             240,
             170,
             130,
-            window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
+            //window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
         );
         this.retanguloBibliografia.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
@@ -73,7 +73,7 @@ export default class BibliotecaScene extends Phaser.Scene {
             210,
             170,
             130,
-            window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
+            //window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
         );
         this.retanguloLivros.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();
@@ -86,7 +86,7 @@ export default class BibliotecaScene extends Phaser.Scene {
             190,
             70,
             140,
-            window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
+            //window.location.origin.includes('localhost') ? 0xffffff : 0xffffff00,
         );
         this.retanguloLinks.setInteractive().on('pointerup', () => {
             const { x: PlayerX, y: PlayerY } = this.player.getPositionInTiles();

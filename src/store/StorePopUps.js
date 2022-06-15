@@ -17,6 +17,10 @@ class StorePopUps {
         makeAutoObservable(this);
     }
 
+    anyPopupIsOpen() {
+        return this.getPropertyInArray().some((item) => this.popups[item]);
+    }
+
     getPropertyInArray() {
         return Object.getOwnPropertyNames(this.popups);
     }

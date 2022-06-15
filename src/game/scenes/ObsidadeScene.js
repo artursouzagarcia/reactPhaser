@@ -5,6 +5,7 @@ import Bandeira from '../objects/bandeira';
 import Auditorio from '../objects/auditorio';
 import PhaserTooltip, { addTooltip } from '../components/tooltips';
 import aulasMOKE from '../../store/mokeAula';
+import StorePopUps from '../../store/StorePopUps';
 
 const COLOR_PRIMARY = 0x007bff;
 
@@ -221,7 +222,6 @@ export default class GameScene extends Phaser.Scene {
     }
 
     handleClickInMap(pointer) {
-        console.log(pointer);
         let tileClicked = this.map.getTileAtWorldXY(pointer.worldX, pointer.worldY);
         // if (tileClicked.index !== 33) {
         //     return console.log('Clicou fora');
@@ -232,6 +232,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     findPathAndMove(fromX, fromY, toX, toY, acaoDepoisDeAndar) {
+        if (StorePopUps.anyPopupIsOpen()) return console.log('Algum popup esta aberto');
         //converte coordenadas para int caso venham de cálculos com decimal
         fromX = parseInt(fromX);
         fromY = parseInt(fromY);
@@ -241,7 +242,6 @@ export default class GameScene extends Phaser.Scene {
             if (path === null) {
                 return console.error('Path was not found.');
             } else {
-                // this.moveCharacter(path);
                 console.log(toX, toY);
                 this.player.move(path, this.map, acaoDepoisDeAndar);
             }

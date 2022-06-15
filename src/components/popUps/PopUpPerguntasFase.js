@@ -200,7 +200,17 @@ function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objA
                                 ))}
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
-                            <button style={styleBtn}>Voltar</button>
+                            <button
+                                style={styleBtn}
+                                onClick={() => {
+                                    if (vendoGabarito) return setVendoGabarito(false);
+                                    // if(Array.isArray(aula.perguntas) && aula.perguntas.length > 1){
+
+                                    // }
+                                }}
+                            >
+                                Voltar
+                            </button>
                             {vendoGabarito ? (
                                 <button
                                     style={{ ...styleBtn, background: '#1a8616' }}
@@ -217,8 +227,20 @@ function PopUpPerguntasFase({ popUpAulaPerguntasIsOpen, closePopUpAulaFase, objA
                                     {indexPerguntaVendo == aula.perguntas.length - 1 ? 'Fechar' : 'Proximo Exercício'}
                                 </button>
                             ) : (
-                                <button style={{ ...styleBtn, background: '#1a8616' }} onClick={() => handleVerGabarito()}>
-                                    Ver Gabarito
+                                <button
+                                    title={
+                                        pergunta.resposta != null
+                                            ? 'Clique para verificar sua resposta e ver o gabarito!'
+                                            : 'Selecione uma das opções a cima para verificar sua resposta.'
+                                    }
+                                    style={{
+                                        ...styleBtn,
+                                        background: pergunta.resposta != null ? '#1a8616' : '#cecece',
+                                        cursor: pergunta.resposta != null ? 'pointer' : 'not-allowed',
+                                    }}
+                                    onClick={() => handleVerGabarito()}
+                                >
+                                    Verificar Resposta
                                 </button>
                             )}
                         </div>
