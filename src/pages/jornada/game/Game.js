@@ -38,6 +38,7 @@ import PopUpLinks from '../../../components/popUps/popUpLinks';
 import PopUpLivros from '../../../components/popUps/popUpLivros';
 import PopUpHelp from '../../../components/popUps/popUpHelp';
 import PopUpSatisfacao from '../../../components/popUps/PopUpSatisfacao';
+import PopupMontaPersonagem from '../../../components/popUps/popupMontaPersonagem';
 
 // import graduation from '../../../components/animacoes/87227-graduation.gif';
 import soundError from '../../../game/assets/soundfx/mixkit-click-error-1110.wav';
@@ -276,6 +277,10 @@ export default observer(() => {
 
             {storePopUps.popups.help && (
                 <PopUpHelp closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
+            )}
+
+            {storePopUps.popups.montaPersonagem && (
+                <PopupMontaPersonagem closePopUp={() => storePopUps.closeAllPopUps()} pauseAmbiente={ambienceAudio} />
             )}
 
             {jornadaSelecionada && storeJornada.popUpVideoAulaAberto && (

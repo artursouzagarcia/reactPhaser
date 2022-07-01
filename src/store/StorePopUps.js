@@ -11,6 +11,7 @@ class StorePopUps {
         livros: false,
         links: false,
         help: false,
+        montaPersonagem: true,
     };
 
     constructor() {

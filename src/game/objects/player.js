@@ -32,7 +32,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         this.scene.anims.create({
             key: 'idle',
-            frames: this.scene.anims.generateFrameNumbers('avatarSprit', { frames: [18] }),
+            frames: this.scene.anims.generateFrameNumbers('avatarSprit', { frames: [8] }),
             frameRate: 1,
             repeat: -1,
         });
@@ -40,36 +40,36 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.anims.create({
             key: 'left',
             frames: this.scene.anims.generateFrameNumbers('avatarSprit', {
-                frames: [8, 7, 6, 5, 4, 3, 2, 1, 0],
+                frames: [15, 14, 13, 12, 11, 10, 9],
             }),
-            frameRate: 12,
+            frameRate: 8,
             repeat: -1,
         });
 
         this.scene.anims.create({
             key: 'right',
             frames: this.scene.anims.generateFrameNumbers('avatarSprit', {
-                frames: [9, 10, 11, 12, 13, 14, 15, 16, 17],
+                frames: [16, 17, 18, 19, 20, 21, 22],
             }),
-            frameRate: 12,
+            frameRate: 8,
             repeat: -1,
         });
 
         this.scene.anims.create({
             key: 'top',
             frames: this.scene.anims.generateFrameNumbers('avatarSprit', {
-                frames: [19, 20],
+                frames: [23, 24, 25, 26, 27, 28],
             }),
-            frameRate: 12,
+            frameRate: 8,
             repeat: -1,
         });
 
         this.scene.anims.create({
             key: 'bottom',
             frames: this.scene.anims.generateFrameNumbers('avatarSprit', {
-                frames: [21, 22],
+                frames: [0, 1, 2, 3, 4, 5, 6, 7],
             }),
-            frameRate: 12,
+            frameRate: 8,
             repeat: -1,
         });
         this.play('idle');
@@ -102,6 +102,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
             this.target.y = ey * map.tileHeight;
             return {
                 targets: this,
+                // x: { value: ex * map.tileWidth, duration: 100 },
+                // y: { value: ey * map.tileHeight, duration: 100 },
                 x: { value: ex * map.tileWidth, duration: window.location.origin.includes('localhost') ? 10 : 100 },
                 y: { value: ey * map.tileHeight, duration: window.location.origin.includes('localhost') ? 10 : 100 },
                 onComplete: (e) => {

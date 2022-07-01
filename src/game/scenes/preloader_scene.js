@@ -151,7 +151,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
         this.load.spritesheet('avatarSprit', avatar_sprite, {
             frameWidth: 64,
-            frameHeight: 128,
+            frameHeight: 109,
         });
 
         this.load.spritesheet('cadeadoSprite', avatar_sprite, {
